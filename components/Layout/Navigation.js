@@ -9,7 +9,6 @@
  */
 
 import React from 'react';
-import Link from '../Link';
 import s from './Navigation.css';
 
 class Navigation extends React.Component {

@@ -10,6 +10,8 @@
 
 import React, { PropTypes } from 'react';
 import Layout from '../../components/Layout';
+import Carousel from '../../components/Carousel';
+import Portfolio from '../../components/Portfolio';
 import s from './styles.css';
 import { title, html } from './index.md';
 
@@ -29,8 +31,11 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <Layout className={s.content}>
-      </Layout>
+      <div>
+        <Layout className={s.content} />
+        <Carousel />
+        <Portfolio />
+      </div>
     );
   }
 
