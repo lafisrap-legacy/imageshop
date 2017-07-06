@@ -15,39 +15,39 @@ import s from './Canvas.css';
 
 class Canvas extends React.Component {
 
-  static propTypes = {
-    className: PropTypes.string,
-  };
+    static propTypes = {
+        className: PropTypes.string,
+    };
 
-  componentDidMount() {
+    componentDidMount() {
     //window.componentHandler.upgradeElement(this.root);
-  }
+    }
 
-  componentWillUnmount() {
+    componentWillUnmount() {
     //window.componentHandler.downgradeElements(this.root);
-  }
+    }
 
-  render() {
-    let image = this.props.images[this.props.imageId],
-        canvas = this.props.canvases[this.props.canvas];
+    render() {
+        let image = this.props.images[this.props.imageId],
+            canvas = this.props.canvases[this.props.canvas];
 
-    console.assert( image, `Image Id ${this.props.imageId} not found for carousel.`)
-    console.assert( canvas, `Canvas ${this.props.canvas} not found for carousel.`)
+        console.assert( image, `Image Id ${this.props.imageId} not found for carousel.`)
+        console.assert( canvas, `Canvas ${this.props.canvas} not found for carousel.`)
 
-    return (
-        <div className="col-md-7 pull-md-5 hidden-xs my-auto">
-            <div className="device-container">
-                <div className={`device-mockup ${canvas.name} ${canvas.orientation} ${canvas.color}`}>
-                    <div className="device">
-                        <div className="screen">
-                            <img className="img-fluid" src={image.imageSmall} alt={image.alt} />
+        return (
+            <div className="col-md-7 pull-md-5 hidden-xs my-auto">
+                <div className={ cx("device-container", s.deviceContainer) }>
+                    <div className={ cx("device-mockup", canvas.name, "landscape", canvas.color, s.deviceMockup )}>
+                        <div className={ cx("device", s.device) }>
+                            <div className={ cx("screen", s.screen) }>
+                                <img className={ cx("img-fluid", s.img) } src={image.imageSmall} alt={image.alt} />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
-  }
+        );
+    }
 }
 
 function mapStateToProps({ images, canvases }) {

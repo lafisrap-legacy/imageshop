@@ -16,53 +16,66 @@ import Canvas from './Canvas';
 import Panel from './Panel';
 
 class Carousel extends React.Component {
+    constructor(props) {
+        super(props);
 
-  static propTypes = {
+        this.items = [];
+    }
+
+    static propTypes = {
     className: PropTypes.string,
-  };
+    };
 
-  componentDidMount() {
-    $(".portfolio-carousel").owlCarousel({
-        singleItem: true,
-        navigation: true,
-        pagination: false,
-        navigationText: [
-            "<i class='fa fa-angle-left'></i>",
-            "<i class='fa fa-angle-right'></i>"
-        ],
-        autoHeight: true,
-        mouseDrag: false,
-        touchDrag: false,
-        transitionStyle: "fadeUp"
-    });
+    componentDidMount() {
+        $(".portfolio-carousel").owlCarousel({
+            singleItem: true,
+            navigation: true,
+            pagination: false,
+            navigationText: [
+                "<i class='fa fa-angle-left'></i>",
+                "<i class='fa fa-angle-right'></i>"
+            ],
+            autoHeight: true,
+            mouseDrag: false,
+            touchDrag: false,
+            transitionStyle: "fadeUp"
+        });
 
-    //window.componentHandler.upgradeElement(this.root);
-  }
+        this.items.map( item => item.style.paddingTop = item.style.paddingBottom = (screen.height - item.clientHeight) / 2 + "px" );
+        console.log( this.items );
 
-  componentWillUnmount() {
-    //window.componentHandler.downgradeElements(this.root);
-  }
+        //window.componentHandler.upgradeElement(this.root);
+      }
 
-  render() {
-    let carousel = this.props.carousel.map( page => {
-        return (
-            <div className="item" key={page.imageId + "-" + page.canvas} style={{backgroundImage: "url('/startbootstrap/img/agency/portfolio/carousel/bg-1.jpg')"}}>
-                <div className="container-fluid">
-                    <div className="row h-100">
-                        <Panel imageId={ page.imageId } />
-                        <Canvas imageId={ page.imageId } canvas={ page.canvas } />
+      componentWillUnmount() {
+        //window.componentHandler.downgradeElements(this.root);
+      }
+
+      render() {
+        let carousel = this.props.carousel.map( page => {
+            return (
+                <div
+                    className={ cx("item", s.item) }
+                    key={page.imageId + "-" + page.canvas}
+                    style={{backgroundImage: "url('/startbootstrap/img/agency/portfolio/carousel/bg-1.jpg')"}}
+                    ref={ item => this.items.push( item ) }
+                >
+                    <div className={ cx("container-fluid", s.container) }>
+                        <div className={ cx("row h-100", s.row) }>
+                            <Panel imageId={ page.imageId } />
+                            <Canvas imageId={ page.imageId } canvas={ page.canvas } />
+                        </div>
                     </div>
                 </div>
+            );
+        })
+
+        return (
+            <div className="portfolio-carousel wow fadeIn owl-carousel owl-theme" id="carousel">
+                { carousel }
             </div>
         );
-    })
-
-    return (
-        <div className="portfolio-carousel wow fadeIn owl-carousel owl-theme" id="carousel">
-            { carousel }
-        </div>
-    );
-  }
+    }
 }
 
 function mapStateToProps({ carousel }) {

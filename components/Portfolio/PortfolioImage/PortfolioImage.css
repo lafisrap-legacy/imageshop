@@ -10,10 +10,11 @@
 
 .mix img {
 	width: 345px;
+	border-radius: 20px;
 }
 
 .wrapper {
-
+	border-radius: 20px;
 }
 
 .img {

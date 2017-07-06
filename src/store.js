@@ -10,10 +10,10 @@
 
 import { createStore } from 'redux';
 
+const mockups = ["galaxy_s3","galaxy_s5","galaxy_tab4","galaxy_tab4_small","imac","ipad","ipad_air","ipad_air_2","ipad_pro","iphone5","iphone_6","iphone_6_plus","iphone_se","lumia920","lumia_930","macbook","macbook_2015","nexus_6","nexus7","samsung_tv","surface"];
 // Centralized application state
 // For more information visit http://redux.js.org/
 const initialState = {
-
 	cart: {
 		items: [{
 			imageId: 1008,
@@ -140,49 +140,49 @@ const initialState = {
 				name: "ice",
 				description: "ice,ice,ice,ice,ice"
 			}, 
-		1022: {
+		1018: {
 				image: "/startbootstrap/img/gallery/goldenclouds.jpg",
 				imageSmall: "/startbootstrap/img/gallery/goldenclouds.jpg",
 				alt: "Alternative text",
 				name: "goldenclouds",
 				description: "goldenclouds,goldenclouds,goldenclouds,goldenclouds,goldenclouds"
 			}, 
-		1023: {
+		1019: {
 				image: "/startbootstrap/img/gallery/goldenflight.jpg",
 				imageSmall: "/startbootstrap/img/gallery/goldenflight.jpg",
 				alt: "Alternative text",
 				name: "goldenflight",
 				description: "goldenflight,goldenflight,goldenflight,goldenflight,goldenflight"
 			}, 
-		1024: {
+		1020: {
 				image: "/startbootstrap/img/gallery/blossom.jpg",
 				imageSmall: "/startbootstrap/img/gallery/blossom.jpg",
 				alt: "Alternative text",
 				name: "blossom",
 				description: "blossom,blossom,blossom,blossom,blossom"
 			}, 
-		1025: {
+		1021: {
 				image: "/startbootstrap/img/gallery/bud.jpg",
 				imageSmall: "/startbootstrap/img/gallery/bud.jpg",
 				alt: "Alternative text",
 				name: "bud",
 				description: "bud,bud,bud,bud,bud"
 			}, 
-		1026: {
+		1022: {
 				image: "/startbootstrap/img/gallery/fragile.jpg",
 				imageSmall: "/startbootstrap/img/gallery/fragile.jpg",
 				alt: "Alternative text",
 				name: "fragile",
 				description: "fragile,fragile,fragile,fragile,fragile"
 			}, 
-		1027: {
+		1023: {
 				image: "/startbootstrap/img/gallery/stairs.jpg",
 				imageSmall: "/startbootstrap/img/gallery/stairs.jpg",
 				alt: "Alternative text",
 				name: "stairs",
 				description: "stairs,stairs,stairs,stairs,stairs"
 			}, 
-		1028: {
+		1024: {
 			image: "/startbootstrap/img/gallery/greece.jpg",
 			imageSmall: "/startbootstrap/img/gallery/greece.jpg",
 				alt: "Alternative text",
@@ -410,7 +410,7 @@ const initialState = {
 		  ]
 		},
 		{
-		  "imageId": 1022,
+		  "imageId": 1018,
 		  "captionTitle": "Golden Clouds",
 		  "captionCategory": "...",
 		  "filters": [
@@ -420,7 +420,7 @@ const initialState = {
 		  ]
 		},
 		{
-		  "imageId": 1023,
+		  "imageId": 1019,
 		  "captionTitle": "Flight",
 		  "captionCategory": "...",
 		  "filters": [
@@ -430,7 +430,7 @@ const initialState = {
 		  ]
 		},
 		{
-		  "imageId": 1024,
+		  "imageId": 1020,
 		  "captionTitle": "Blossom",
 		  "captionCategory": "...",
 		  "filters": [
@@ -439,7 +439,7 @@ const initialState = {
 		  ]
 		},
 		{
-		  "imageId": 1025,
+		  "imageId": 1021,
 		  "captionTitle": "Bud",
 		  "captionCategory": "...",
 		  "filters": [
@@ -450,7 +450,7 @@ const initialState = {
 		  ]
 		},
 		{
-		  "imageId": 1026,
+		  "imageId": 1022,
 		  "captionTitle": "Fragile",
 		  "captionCategory": "...",
 		  "filters": [
@@ -459,7 +459,7 @@ const initialState = {
 		  ]
 		},
 		{
-		  "imageId": 1027,
+		  "imageId": 1023,
 		  "captionTitle": "Stairs",
 		  "captionCategory": "...",
 		  "filters": [
@@ -467,7 +467,7 @@ const initialState = {
 		  ]
 		},
 		{
-		  "imageId": 1028,
+		  "imageId": 1024,
 		  "captionTitle": "Greece",
 		  "captionCategory": "...",
 		  "filters": [
@@ -481,44 +481,176 @@ const initialState = {
 	},
 
 	carousel: [ {
-		canvas: "Canvas",
+		canvas: "galaxy_s3",
 		imageId: 1001
 	}, {
-		canvas: "iPhone",
+		canvas: "galaxy_s5",
 		imageId: 1002
 	}, {
-		canvas: "iPad",
+		canvas: "galaxy_tab4",
 		imageId: 1003
 	}, {
-		canvas: "macBookAir",
+		canvas: "galaxy_tab4_small",
 		imageId: 1004
+	}, {
+		canvas: "imac",
+		imageId: 1005
+	}, {
+		canvas: "ipad",
+		imageId: 1006
+	}, {
+		canvas: "ipad_air",
+		imageId: 1007
+	}, {
+		canvas: "ipad_air_2",
+		imageId: 1008
+	}, {
+		canvas: "ipad_pro",
+		imageId: 1009
+	}, {
+		canvas: "iphone5",
+		imageId: 1010
+	}, {
+		canvas: "iphone_6",
+		imageId: 1011
+	}, {
+		canvas: "iphone_6_plus",
+		imageId: 1012
+	}, {
+		canvas: "iphone_se",
+		imageId: 1013
+	}, {
+		canvas: "lumia920",
+		imageId: 1014
+	}, {
+		canvas: "lumia_930",
+		imageId: 1015
+	}, {
+		canvas: "macbook",
+		imageId: 1016
+	}, {
+		canvas: "macbook_2015",
+		imageId: 1017
+	}, {
+		canvas: "nexus_6",
+		imageId: 1018
+	}, {
+		canvas: "nexus7",
+		imageId: 1019
+	}, {
+		canvas: "samsung_tv",
+		imageId: 1020
+	}, {
+		canvas: "surface",
+		imageId: 1021
 	} ],
 
 	canvases: {
-		"macBookAir" : {
-				name: "macbook",
-				size: "30 x 20cm",
-				orientation: "landscape",
-				color: "black"
-			},
-		"Canvas" : {
-				name: "Big Canvas",
-				size: "30 x 20cm",
-				orientation: "landscape",
-				color: "black"
-			},
-		"iPhone" : {
-				name: "iPhone 7",
-				size: "30 x 20cm",
-				orientation: "portrait",
-				color: "black"
-			},
-		"iPad" : {
-				name: "iPad 3",
-				size: "30 x 20cm",
-				orientation: "landscape",
-				color: "black"
-			},
+		"galaxy_s3": 	{
+			name: "galaxy_s3",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"galaxy_s5": 	{
+			name: "galaxy_s5",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"galaxy_tab4": 	{
+			name: "galaxy_tab4",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"galaxy_tab4_small": 	{
+			name: "galaxy_tab4_small",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"imac": 	{
+			name: "imac",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"ipad": 	{
+			name: "ipad",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"ipad_air": 	{
+			name: "ipad_air",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"ipad_air_2": 	{
+			name: "ipad_air_2",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"ipad_pro": 	{
+			name: "ipad_pro",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"iphone5": 	{
+			name: "iphone5",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"iphone_6": 	{
+			name: "iphone_6",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"iphone_6_plus": 	{
+			name: "iphone_6_plus",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"iphone_se": 	{
+			name: "iphone_se",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"lumia920": 	{
+			name: "lumia920",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"lumia_930": 	{
+			name: "lumia_930",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"macbook": 	{
+			name: "macbook",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"macbook_2015": 	{
+			name: "macbook_2015",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"nexus_6": 	{
+			name: "nexus_6",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"nexus7": 	{
+			name: "nexus7",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"samsung_tv": 	{
+			name: "samsung_tv",
+			size: "30 x 20cm",
+			color: "black"
+		},
+		"surface": 	{
+			name: "surface",
+			size: "30 x 20cm",
+			color: "black"
+		},
 	}
 
 };
