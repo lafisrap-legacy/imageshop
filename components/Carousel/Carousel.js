@@ -9,8 +9,11 @@
  */
 
 import React, { PropTypes } from 'react';
+import { connect } from "react-redux";
 import cx from 'classnames';
 import s from './Carousel.css';
+import Canvas from './Canvas';
+import Panel from './Panel';
 
 class Carousel extends React.Component {
 
@@ -41,116 +44,29 @@ class Carousel extends React.Component {
   }
 
   render() {
+    let carousel = this.props.carousel.map( page => {
+        return (
+            <div className="item" key={page.imageId + "-" + page.canvas} style={{backgroundImage: "url('/startbootstrap/img/agency/portfolio/carousel/bg-1.jpg')"}}>
+                <div className="container-fluid">
+                    <div className="row h-100">
+                        <Panel imageId={ page.imageId } />
+                        <Canvas imageId={ page.imageId } canvas={ page.canvas } />
+                    </div>
+                </div>
+            </div>
+        );
+    })
+
     return (
-      <div>
-        <div className="portfolio-carousel wow fadeIn owl-carousel owl-theme" id="work">
-            <div className="item" style={{backgroundImage: "url('/startbootstrap/img/agency/portfolio/carousel/bg-1.jpg')"}}>
-                <div className="container-fluid">
-                    <div className="row h-100">
-                        <div className="col-md-5 push-md-7 my-auto">
-                            <div className="project-details">
-                                <span className="project-name">Project Name</span>
-                                <span className="project-description">Branding, Website Design</span>
-                                <hr className="colored" />
-                                <a href="#portfolioModal1" data-toggle="modal" className="btn btn-primary">View Details <i className="fa fa-long-arrow-right fa-fw"></i></a>
-                            </div>
-                        </div>
-                        <div className="col-md-7 pull-md-5 hidden-xs my-auto">
-                            <div className="device-container">
-                                <div className="device-mockup macbook portrait black">
-                                    <div className="device">
-                                        <div className="screen">
-                                            <img className="img-fluid" src="/startbootstrap/img/agency/portfolio/carousel/screen-1a.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="item" style={{backgroundImage: "url('/startbootstrap/img/agency/portfolio/carousel/bg-2.jpg')"}}>
-                <div className="container-fluid">
-                    <div className="row h-100">
-                        <div className="col-md-5 push-md-7 my-auto">
-                            <div className="project-details">
-                                <span className="project-name">Project Name</span>
-                                <span className="project-description">Branding, Website Design</span>
-                                <hr className="colored" />
-                                <a href="#portfolioModal2" data-toggle="modal" className="btn btn-primary">View Details <i className="fa fa-long-arrow-right fa-fw"></i></a>
-                            </div>
-                        </div>
-                        <div className="col-md-7 pull-md-5 hidden-xs my-auto">
-                            <div className="device-container">
-                                <div className="device-mockup macbook portrait black">
-                                    <div className="device">
-                                        <div className="screen">
-                                            <img className="img-fluid" src="/startbootstrap/img/agency/portfolio/carousel/screen-2a.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="item" style={{backgroundImage: "url('/startbootstrap/img/agency/portfolio/carousel/bg-3.jpg')"}}>
-                <div className="container-fluid">
-                    <div className="row h-100">
-                        <div className="col-md-5 push-md-7 my-auto">
-                            <div className="project-details">
-                                <span className="project-name">Project Name</span>
-                                <span className="project-description">Branding, Website Design</span>
-                                <hr className="colored" />
-                                <a href="#portfolioModal3" data-toggle="modal" className="btn btn-primary">View Details <i className="fa fa-long-arrow-right fa-fw"></i></a>
-                            </div>
-                        </div>
-                        <div className="col-md-7 pull-md-5 hidden-xs my-auto">
-                            <div className="device-container">
-                                <div className="device-mockup macbook portrait black">
-                                    <div className="device">
-                                        <div className="screen">
-                                            <img className="img-fluid" src="/startbootstrap/img/agency/portfolio/carousel/screen-3a.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="item" style={{backgroundImage: "url('/startbootstrap/img/agency/portfolio/carousel/bg-4.jpg')"}}>
-                <div className="container-fluid">
-                    <div className="row h-100">
-                        <div className="col-md-5 push-md-7 my-auto">
-                            <div className="project-details">
-                                <span className="project-name">Project Name</span>
-                                <span className="project-description">Branding, Website Design</span>
-                                <hr className="colored" />
-                                <a href="#portfolioModal4" data-toggle="modal" className="btn btn-primary">View Details <i className="fa fa-long-arrow-right fa-fw"></i></a>
-                            </div>
-                        </div>
-                        <div className="col-md-7 pull-md-5 hidden-xs my-auto">
-                            <div className="device-container">
-                                <div className="device-mockup macbook portrait black">
-                                    <div className="device">
-                                        <div className="screen">
-                                            <img className="img-fluid" src="/startbootstrap/img/agency/portfolio/carousel/screen-4.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div className="portfolio-carousel wow fadeIn owl-carousel owl-theme" id="carousel">
+            { carousel }
         </div>
-      </div>
     );
   }
 }
 
-export default Carousel;
+function mapStateToProps({ carousel }) {
+    return { carousel };
+}
+
+export default connect(mapStateToProps)(Carousel);
