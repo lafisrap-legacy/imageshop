@@ -9,8 +9,11 @@
  */
 
 import React, { PropTypes } from 'react';
+import { connect } from "react-redux";
 import cx from 'classnames';
 import s from './Portfolio.css';
+import PortfolioFilter from './PortfolioFilter';
+import PortfolioGrid from './PortfolioGrid';
 
 class Portfolio extends React.Component {
 
@@ -36,132 +39,24 @@ class Portfolio extends React.Component {
   }
 
   render() {
+    let portfolio = this.props.portfolio;
+
     return (
         <section className="page-section">
             <div className="container text-center wow fadeIn">
                 <h2>Portfolio</h2>
                 <hr className="colored" />
                 <p>Here are some other projects that we´ve worked on.</p>
-                <div className="controls mt-3">
-                    <button type="button" className="control btn btn-secondary btn-sm mx-2 mb-4" data-filter="all">All</button>
-                    <button type="button" className="control btn btn-secondary btn-sm mx-2 mb-4" data-filter=".identity">Identity</button>
-                    <button type="button" className="control btn btn-secondary btn-sm mx-2 mb-4" data-filter=".graphic">Graphic</button>
-                    <button type="button" className="control btn btn-secondary btn-sm mx-2 mb-4" data-filter=".web">Web</button>
-                </div>
-                <div className="portfolio-grid clearfix" id="portfolioList">
-                    <div className="mix identity" href="/startbootstrap/img/agency/portfolio/grid/grid-1.jpg" title="Client Name">
-                        <div className="portfolio-wrapper">
-                            <img src="/startbootstrap/img/agency/portfolio/grid/grid-1.jpg" alt="" />
-                            <div className="caption">
-                                <div className="caption-text">
-                                    <a className="text-title">Client Name</a>
-                                    <span className="text-category">Brand Identity</span>
-                                </div>
-                                <div className="caption-bg"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="mix web" href="/startbootstrap/img/agency/portfolio/grid/grid-2.jpg" title="Client Name">
-                        <div className="portfolio-wrapper">
-                            <img src="/startbootstrap/img/agency/portfolio/grid/grid-2.jpg" alt="" />
-                            <div className="caption">
-                                <div className="caption-text">
-                                    <a className="text-title">Client Name</a>
-                                    <span className="text-category">Web Development</span>
-                                </div>
-                                <div className="caption-bg"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="mix web" href="/startbootstrap/img/agency/portfolio/grid/grid-3.jpg" title="Client Name">
-                        <div className="portfolio-wrapper">
-                            <img src="/startbootstrap/img/agency/portfolio/grid/grid-3.jpg" alt="" />
-                            <div className="caption">
-                                <div className="caption-text">
-                                    <a className="text-title">Client Name</a>
-                                    <span className="text-category">Web Development</span>
-                                </div>
-                                <div className="caption-bg"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="mix identity" href="/startbootstrap/img/agency/portfolio/grid/grid-4.jpg" title="Client Name">
-                        <div className="portfolio-wrapper">
-                            <img src="/startbootstrap/img/agency/portfolio/grid/grid-4.jpg" alt="" />
-                            <div className="caption">
-                                <div className="caption-text">
-                                    <a className="text-title">Client Name</a>
-                                    <span className="text-category">Brand Identity</span>
-                                </div>
-                                <div className="caption-bg"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="mix web" href="/startbootstrap/img/agency/portfolio/grid/grid-5.jpg" title="Client Name">
-                        <div className="portfolio-wrapper">
-                            <img src="/startbootstrap/img/agency/portfolio/grid/grid-5.jpg" alt="" />
-                            <div className="caption">
-                                <div className="caption-text">
-                                    <a className="text-title">Client Name</a>
-                                    <span className="text-category">Web Development</span>
-                                </div>
-                                <div className="caption-bg"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="mix graphic" href="/startbootstrap/img/agency/portfolio/grid/grid-6.jpg" title="Client Name">
-                        <div className="portfolio-wrapper">
-                            <img src="/startbootstrap/img/agency/portfolio/grid/grid-6.jpg" alt="" />
-                            <div className="caption">
-                                <div className="caption-text">
-                                    <a className="text-title">Client Name</a>
-                                    <span className="text-category">Graphic Design</span>
-                                </div>
-                                <div className="caption-bg"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="mix graphic" href="/startbootstrap/img/agency/portfolio/grid/grid-7.jpg" title="Client Name">
-                        <div className="portfolio-wrapper">
-                            <img src="/startbootstrap/img/agency/portfolio/grid/grid-7.jpg" alt="" />
-                            <div className="caption">
-                                <div className="caption-text">
-                                    <a className="text-title">Client Name</a>
-                                    <span className="text-category">Graphic Design</span>
-                                </div>
-                                <div className="caption-bg"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="mix web" href="/startbootstrap/img/agency/portfolio/grid/grid-8.jpg" title="Client Name">
-                        <div className="portfolio-wrapper">
-                            <img src="/startbootstrap/img/agency/portfolio/grid/grid-8.jpg" alt="" />
-                            <div className="caption">
-                                <div className="caption-text">
-                                    <a className="text-title">Client Name</a>
-                                    <span className="text-category">Web Development</span>
-                                </div>
-                                <div className="caption-bg"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="mix identity" href="/startbootstrap/img/agency/portfolio/grid/grid-9.jpg" title="Client Name">
-                        <div className="portfolio-wrapper">
-                            <img src="/startbootstrap/img/agency/portfolio/grid/grid-9.jpg" alt="" />
-                            <div className="caption">
-                                <div className="caption-text">
-                                    <a className="text-title">Client Name</a>
-                                    <span className="text-category">Brand Identity</span>
-                                </div>
-                                <div className="caption-bg"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <PortfolioFilter />
+                <PortfolioGrid />
             </div>
         </section>
     );
   }
 }
 
-export default Portfolio;
+function mapStateToProps({ portfolio }) {
+    return { portfolio };
+}
+
+export default connect(mapStateToProps)(Portfolio);

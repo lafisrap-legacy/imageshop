@@ -12,8 +12,8 @@ import React, { PropTypes } from 'react';
 import Layout from '../../components/Layout';
 import Carousel from '../../components/Carousel';
 import Portfolio from '../../components/Portfolio';
+import Footer from '../../components/Footer';
 import s from './styles.css';
-import { title, html } from './index.md';
 
 class HomePage extends React.Component {
 
@@ -26,15 +26,15 @@ class HomePage extends React.Component {
   };
 
   componentDidMount() {
-    document.title = title;
   }
 
   render() {
     return (
       <div>
         <Layout className={s.content} />
-        <Carousel />
         <Portfolio />
+        <Carousel />
+        <Footer />
       </div>
     );
   }
