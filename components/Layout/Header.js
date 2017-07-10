@@ -25,7 +25,7 @@ class Header extends React.Component {
     return (
       <header 
         className={`mdl-layout__header ${s.header} masthead`}
-        style={{"backgroundImage": "url('/startbootstrap/img/agency/backgrounds/bg-header.jpg')"}}
+        style={{"backgroundImage": "url('/startbootstrap/img/header/fragile.jpg')"}}
         ref={node => (this.root = node)}
       >
         <div className="container h-100">

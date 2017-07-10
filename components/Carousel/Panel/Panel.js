@@ -28,9 +28,13 @@ class Panel extends React.Component {
   }
 
   render() {
-    let image = this.props.images[this.props.imageId];
+    if( !this.props.images ) return <div className="spinner"></div>;
+
+    let image = this.props.images[this.props.imageId],
+        frame = this.props.frames[this.props.frameName];
 
     console.assert( image, `Image Id ${this.props.imageId} not found for carousel.`)
+    console.assert( frame, `Frame ${this.props.frameName} not found for carousel.`)
 
     return (
         <div className="col-md-5 push-md-7 my-auto">
@@ -44,8 +48,8 @@ class Panel extends React.Component {
   }
 }
 
-function mapStateToProps({ images }) {
-    return { images };
+function mapStateToProps({ images, frames }) {
+    return { images, frames };
 }
 
 export default connect(mapStateToProps)(Panel);

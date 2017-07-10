@@ -19,14 +19,14 @@ class Carousel extends React.Component {
     constructor(props) {
         super(props);
 
-        this.items = [];
+        this.pages = [];
     }
 
     static propTypes = {
     className: PropTypes.string,
     };
 
-    componentDidMount() {
+    componentDidUpdate() {
         $(".portfolio-carousel").owlCarousel({
             singleItem: true,
             navigation: true,
@@ -41,8 +41,7 @@ class Carousel extends React.Component {
             transitionStyle: "fadeUp"
         });
 
-        this.items.map( item => item.style.paddingTop = item.style.paddingBottom = (screen.height - item.clientHeight) / 2 + "px" );
-        console.log( this.items );
+        this.pages.map( page => page.style.paddingTop = page.style.paddingBottom = (screen.height - page.clientHeight) / 2 + "px" );
 
         //window.componentHandler.upgradeElement(this.root);
       }
@@ -52,23 +51,31 @@ class Carousel extends React.Component {
       }
 
       render() {
-        let carousel = this.props.carousel.map( page => {
-            return (
-                <div
-                    className={ cx("item", s.item) }
-                    key={page.imageId + "-" + page.canvas}
-                    style={{backgroundImage: "url('/startbootstrap/img/agency/portfolio/carousel/bg-1.jpg')"}}
-                    ref={ item => this.items.push( item ) }
-                >
-                    <div className={ cx("container-fluid", s.container) }>
-                        <div className={ cx("row h-100", s.row) }>
-                            <Panel imageId={ page.imageId } />
-                            <Canvas imageId={ page.imageId } canvas={ page.canvas } />
+        if( !this.props.carousel.length ) {
+            
+            var carousel = <div className="spinner"></div>;
+
+        } else {
+            var carousel = this.props.carousel.map( page => {
+                return (
+                    <div
+                        className={ cx("page item", s.page) }
+                        key={page.imageId + "-" + page.frameName}
+                        style={{"backgroundImage": `url(${page.backgroundImage})`}}
+                        ref={ page => this.pages.push( page ) }
+                    >
+                        <div className={ cx("container-fluid", s.container) }>
+                            <div className={ cx("row h-100", s.row) }>
+                                <Panel imageId={ page.imageId } frameName={ page.frameName } />
+                                <Canvas imageId={ page.imageId } frameName={ page.frameName } />
+                            </div>
                         </div>
                     </div>
-                </div>
-            );
-        })
+                );
+            });
+
+            console.log("Carousel:",carousel);
+        }
 
         return (
             <div className="portfolio-carousel wow fadeIn owl-carousel owl-theme" id="carousel">

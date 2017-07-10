@@ -21,7 +21,7 @@ class Portfolio extends React.Component {
     className: PropTypes.string,
   };
 
-  componentDidMount() {
+  componentDidUpdate() {
     $('.mix').magnificPopup({
         type: 'image',
         image: {
@@ -39,8 +39,6 @@ class Portfolio extends React.Component {
   }
 
   render() {
-    let portfolio = this.props.portfolio;
-
     return (
         <section className="page-section">
             <div className="container text-center wow fadeIn">

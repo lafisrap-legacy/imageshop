@@ -10,6 +10,7 @@
 
 import React, { PropTypes } from 'react';
 import { connect } from "react-redux";
+import { urlize } from '../../../src/utils';
 import cx from 'classnames';
 import s from './PortfolioImage.css';
 
@@ -30,22 +31,26 @@ class PortfolioImage extends React.Component {
   }
 
   render() {
-    let imageId = this.props.element.imageId,
-        filters = this.props.element.filters,
-        name = this.props.element.name,
-        image = this.props.images[imageId],
-        title = "No title",
-        subtitle = "No subtitle";
+    let el = this.props.element,
+        imageId = el && el.imageId || null;
+
+    if( !imageId ) return <div className="spinner"></div>;
+
+    let filters = el.filters,
+        title = el.captionTitle,
+        subtitle = el.captionCategory,
+        name = el.name,
+        image = this.props.images[imageId];
 
     return (
         <div
-            className={ cx("mix", ...filters, s.mix) }
+            className={ cx("mix", ...filters.map( filter => urlize( filter ) ), s.mix) }
             href={ image.image }
             title={ name }
         >
             <div className={ cx("portfolio-wrapper", s.wrapper) }>
                 <img 
-                    src={ image.image }
+                    src={ image.smallImage }
                     alt="" 
                     ref={ mix => this.mix = mix }
                     className={ s.img }

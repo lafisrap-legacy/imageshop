@@ -9,6 +9,7 @@
  */
 import React, { PropTypes } from 'react';
 import { connect } from "react-redux";
+import { urlize } from '../../../src/utils';
 import cx from 'classnames';
 import s from './PortfolioFilter.css';
 class PortfolioFilter extends React.Component {
@@ -33,10 +34,12 @@ class PortfolioFilter extends React.Component {
     }
 
     render() {
-        let filters = this.props.portfolio.filters,
+        let filters = this.props.portfolio && this.props.portfolio.filters || null;
+
+        if( !filters ) return <div className="spinner"></div>;
 
             // Prepare filter tabs
-            tabs = filters.map((filter, i) => {
+        let tabs = filters.map((filter, i) => {
                 return (
                     <li className="nav-item" key={filter.id}>
                         <a
@@ -63,7 +66,7 @@ class PortfolioFilter extends React.Component {
                         <button
                             type="button"
                             className="control btn btn-secondary btn-sm mx-2 mb-4"
-                            data-filter={`.${topic}`}
+                            data-filter={`.${ urlize( topic )}`}
                             key={topic}
                             ref={ topic => !i? this.state.allTopic[filter.id] = topic : null}
                         >

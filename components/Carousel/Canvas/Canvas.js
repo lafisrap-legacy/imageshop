@@ -28,19 +28,23 @@ class Canvas extends React.Component {
     }
 
     render() {
+        if( !this.props.images || !this.props.frames ) return <div className="spinner"></div>;
+
         let image = this.props.images[this.props.imageId],
-            canvas = this.props.canvases[this.props.canvas];
+            frame = this.props.frames[this.props.frameName];
 
         console.assert( image, `Image Id ${this.props.imageId} not found for carousel.`)
-        console.assert( canvas, `Canvas ${this.props.canvas} not found for carousel.`)
+        console.assert( frame, `Frame ${this.props.frameName} not found for carousel.`)
+
+        console.log(image, frame);
 
         return (
             <div className="col-md-7 pull-md-5 hidden-xs my-auto">
                 <div className={ cx("device-container", s.deviceContainer) }>
-                    <div className={ cx("device-mockup", canvas.name, "landscape", canvas.color, s.deviceMockup )}>
+                    <div className={ cx("device-mockup", frame.frameId, frame.canvas, "landscape", "black", s.deviceMockup )}>
                         <div className={ cx("device", s.device) }>
                             <div className={ cx("screen", s.screen) }>
-                                <img className={ cx("img-fluid", s.img) } src={image.imageSmall} alt={image.alt} />
+                                <img className={ cx("img-fluid", s.img) } src={image.mediumImage} alt={image.alt} />
                             </div>
                         </div>
                     </div>
@@ -50,8 +54,8 @@ class Canvas extends React.Component {
     }
 }
 
-function mapStateToProps({ images, canvases }) {
-    return { images, canvases };
+function mapStateToProps({ images, frames }) {
+    return { images, frames };
 }
 
 export default connect(mapStateToProps)(Canvas);

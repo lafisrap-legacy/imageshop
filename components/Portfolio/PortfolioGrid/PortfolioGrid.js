@@ -29,10 +29,14 @@ class PortfolioGrid extends React.Component {
   }
 
   render() {
-    let elements = this.props.portfolio.elements;
+    let elements = this.props.portfolio && this.props.portfolio.elements || null;
+
+    if( !elements ) elements = <div className="spinner"></div>;
+    else elements = elements.map( element => <PortfolioImage key={ element.imageId } element={ element } />)
+
     return (
         <div className="portfolio-grid clearfix" id="portfolioList">
-            { elements.map( element => <PortfolioImage key={ element.imageId } element={ element } />) }
+            { elements }
         </div>
     );
   }
