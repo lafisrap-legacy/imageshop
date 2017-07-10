@@ -15,7 +15,7 @@ import { parseYaml } from './data';
 import { union, isEmpty } from 'lodash';
 import { urlize } from './utils';
 
-// Canvases: "galaxy_s3", "galaxy_s5", "galaxy_tab4", "galaxy_tab4_small", "imac", "ipad", "ipad_air", "ipad_air_2", "ipad_pro", "iphone5", "iphone_6", "iphone_6_plus", "iphone_se", "lumia920", "lumia_930", "macbook", "macbook_2015", "nexus_6", "nexus7", "samsung_tv", "surface", 
+// Canvases: "galaxy_tab4", "imac", "ipad_air_2", "iphone_6_plus", "macbook_2015", "samsung_tv" 
 
 const IMAGE_PATH = "/startbootstrap/img/gallery/";
 const BACKGROUND_PATH = "/startbootstrap/img/backgrounds/";

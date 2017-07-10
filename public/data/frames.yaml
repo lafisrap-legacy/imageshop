@@ -22,7 +22,7 @@
         Some words to the format
       price: 105.00
   maxNumber: 1
-  canvas: macbook
+  canvas: golden_frame
 
 - name: "Standard Photo Paper"
   formats:
@@ -47,7 +47,7 @@
         Some words to the format
       price: 195.00
   maxNumber: 100
-  canvas: galaxy_tab4
+  canvas: macbook_2015
 
 - name: "Premium Photo Paper"
   formats:
@@ -72,7 +72,7 @@
         Some words to the format
       price: 205.00
   maxNumber: 100
-  canvas: ipad_pro
+  canvas: samsung_tv
 
 - name: "Canvas"
   formats:

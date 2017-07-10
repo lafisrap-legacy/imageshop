@@ -45,7 +45,7 @@ class PortfolioImage extends React.Component {
     return (
         <div
             className={ cx("mix", ...filters.map( filter => urlize( filter ) ), s.mix) }
-            href={ image.image }
+            href={ image.largeImage }
             title={ name }
         >
             <div className={ cx("portfolio-wrapper", s.wrapper) }>
