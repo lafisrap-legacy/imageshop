@@ -20,10 +20,14 @@ class Carousel extends React.Component {
         super(props);
 
         this.pages = [];
+
+        this.state = {
+            test: "TEST1"
+        }
     }
 
     static propTypes = {
-    className: PropTypes.string,
+        className: PropTypes.string,
     };
 
     componentDidUpdate() {
@@ -73,8 +77,6 @@ class Carousel extends React.Component {
                     </div>
                 );
             });
-
-            console.log("Carousel:",carousel);
         }
 
         return (
@@ -85,7 +87,7 @@ class Carousel extends React.Component {
     }
 }
 
-function mapStateToProps({ carousel }) {
+export function mapStateToProps({ carousel }) {
     return { carousel };
 }
 

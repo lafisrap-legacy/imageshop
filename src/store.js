@@ -137,6 +137,8 @@ const store = createStoreWithMiddleware((state = initialState, action) => {
 		if( !isEmpty(state.frames) ) {
 			let firstImage = images[(Object.keys(state.images)[0])],
 				carousel = fillCarousel( firstImage );
+	console.log(JSON.stringify("CAROUSEL",carousel));
+	console.log(JSON.stringify("FIRST",firstImage));
 
 			var newState = { ...state, images, portfolio, carousel };
 		} else {
@@ -154,6 +156,9 @@ const store = createStoreWithMiddleware((state = initialState, action) => {
 		if( !isEmpty(state.images) ) {
 			let firstImage = state.images[(Object.keys(state.images)[0])],
 				carousel = fillCarousel( firstImage );
+	console.log(JSON.stringify(carousel));
+	console.log(JSON.stringify(firstImage));
+
 
 			var newState = { ...state, frames , carousel };
 		} else {
