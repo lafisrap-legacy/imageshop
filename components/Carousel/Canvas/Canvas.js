@@ -36,8 +36,6 @@ class Canvas extends React.Component {
         console.assert( image, `Image Id ${this.props.imageId} not found for carousel.`)
         console.assert( frame, `Frame ${this.props.frameName} not found for carousel.`)
 
-        console.log(image, frame);
-
         return (
             <div className="col-md-7 pull-md-5 hidden-xs my-auto">
                 <div className={ cx("device-container", s.deviceContainer) }>

@@ -125,7 +125,7 @@ function fillCarousel( image ) {
 // Reducers: Here is the central meeting point for all reducers
 //
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
-const store = createStoreWithMiddleware((state = initialState, action) => {
+const reducers = (state = initialState, action) => {
   switch (action.type) {
 
 	case FETCH_IMAGES:
@@ -135,11 +135,9 @@ const store = createStoreWithMiddleware((state = initialState, action) => {
 
 		// If frames from frames.yaml are already loaded, then complete carousel
 		if( !isEmpty(state.frames) ) {
-			let firstImage = images[(Object.keys(state.images)[0])],
+			let firstImage = images[(Object.keys(images)[0])],
 				carousel = fillCarousel( firstImage );
-	console.log(JSON.stringify("CAROUSEL",carousel));
-	console.log(JSON.stringify("FIRST",firstImage));
-
+	
 			var newState = { ...state, images, portfolio, carousel };
 		} else {
 			var newState = { ...state, images, portfolio };
@@ -156,10 +154,7 @@ const store = createStoreWithMiddleware((state = initialState, action) => {
 		if( !isEmpty(state.images) ) {
 			let firstImage = state.images[(Object.keys(state.images)[0])],
 				carousel = fillCarousel( firstImage );
-	console.log(JSON.stringify(carousel));
-	console.log(JSON.stringify(firstImage));
-
-
+	
 			var newState = { ...state, frames , carousel };
 		} else {
 			var newState = { ...state, frames };
@@ -173,6 +168,7 @@ const store = createStoreWithMiddleware((state = initialState, action) => {
 	default:
 	  return state;
   }
-});
+};
+const store = createStoreWithMiddleware(reducers);
 
 export default store;
