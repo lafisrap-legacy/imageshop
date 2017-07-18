@@ -9,13 +9,9 @@
  */
 
 .page {
-	height: 90vh;
+  height: 90vh;
 }
 
 .container {
-	height: 100%;
-}
-
-.row {
-
+  height: 100%;
 }

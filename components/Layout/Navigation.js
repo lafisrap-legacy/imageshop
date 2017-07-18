@@ -9,55 +9,66 @@
  */
 
 import React from 'react';
+import cx from 'classnames';
+
 import s from './Navigation.css';
 
 class Navigation extends React.Component {
 
   componentDidMount() {
-    //window.componentHandler.upgradeElement(this.root);
   }
 
   componentWillUnmount() {
-    //window.componentHandler.downgradeElements(this.root);
   }
 
   render() {
     return (
-      <nav className="mdl-navigation navbar fixed-top navbar-toggleable-md navbar-inverse navbar-expanded" id="mainNav" ref={node => (this.root = node)}>
+      <nav
+        className={cx(
+          'page-section',
+          'mdl-navigation',
+          'navbar',
+          'fixed-top',
+          'navbar-toggleable-md',
+          'navbar-inverse',
+          'navbar-expanded',
+        s.pageSection)}
+        id="mainNav"
+        ref={node => (this.root = node)}
+      >
         <div className="container">
-            <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu <i className="fa fa-bars"></i>
-            </button>
-            <a className="navbar-brand page-scroll" href="#page-top">
-                <img className={`img-fluid ${s.brandImage}`} src="/startbootstrap/img/agency/logo.svg" alt="" />
-            </a>
-            <div className="collapse navbar-collapse" id="navbarResponsive">
-                <ul className="navbar-nav ml-auto">
-                    <li className="nav-item">
-                        <a className="nav-link page-scroll" href="#about">About</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link page-scroll" href="#team">Team</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link page-scroll" href="#services">Process</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link page-scroll" href="#work">Work</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link page-scroll" href="#pricing">Pricing</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link page-scroll" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>      
+          <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu <i className="fa fa-bars" />
+          </button>
+          <a className="navbar-brand page-scroll" href="#page-top">
+            <img className={`img-fluid ${s.brandImage}`} src="/startbootstrap/img/agency/logo.svg" alt="" />
+          </a>
+          <div className="collapse navbar-collapse" id="navbarResponsive">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <a className="nav-link page-scroll" href="#about">About</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link page-scroll" href="#team">Team</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link page-scroll" href="#services">Process</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link page-scroll" href="#work">Work</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link page-scroll" href="#pricing">Pricing</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link page-scroll" href="#contact">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </nav>
     );
   }
-
 }
 
 export default Navigation;

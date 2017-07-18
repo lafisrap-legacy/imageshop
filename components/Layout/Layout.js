@@ -8,25 +8,16 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import React from 'react';
 import Navigation from './Navigation';
 import Header from './Header';
-import Footer from '../Footer';
-import s from './Layout.css';
 
 class Layout extends React.Component {
 
-  static propTypes = {
-    className: PropTypes.string,
-  };
-
   componentDidMount() {
-    //window.componentHandler.upgradeElement(this.root);
   }
 
   componentWillUnmount() {
-    //window.componentHandler.downgradeElements(this.root);
   }
 
   render() {

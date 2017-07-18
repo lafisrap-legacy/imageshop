@@ -9,33 +9,10 @@
  */
 
 .mix img {
-	width: 345px;
-	border-radius: 20px;
+  width: 345px;
+  border-radius: 20px;
 }
 
 .wrapper {
-	border-radius: 20px;
-}
-
-.img {
-
-}
-
-.caption {
-
-}
-
-.captionText {
-
-}
-
-.title {
-}
-
-.subtitle {
-
-}
-
-.background {
-
+  border-radius: 20px;
 }

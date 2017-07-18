@@ -8,24 +8,26 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import { console_log } from '../utils';
+import { consoleLog } from '../utils';
 
 export function correctYaml(data) {
   // Replace tabs with two spaces
-  data = data.replace(/\t/g, '  ');
+  const d = data.replace(/\t/g, '  ');
 
-  return data;
+  return d;
 }
 
-export function parseYaml(data,triedOnce) {
+export function parseYaml(data, triedOnce) {
+  let yaml = null;
+
   try {
-    var yaml = YAML.parse( data );
-  } catch( err ) {
-    if( !triedOnce ) {
-      console_log('WARNING: You have an error in a yaml file. Trying to auto correct ...',err);
-      var yaml = parseYaml( correctYaml( data ), true );
+    yaml = global.YAML.parse(data);
+  } catch (err) {
+    if (!triedOnce) {
+      consoleLog('WARNING: You have an error in a yaml file. Trying to auto correct ...', err);
+      yaml = parseYaml(correctYaml(data), true);
     } else {
-      console_log('ERROR: You have an unrecoverable error in a yaml file. You can use \'https://codebeautify.org/yaml-validator\' to find the error.',err);
+      consoleLog('ERROR: You have an unrecoverable error in a yaml file. You can use \'https://codebeautify.org/yaml-validator\' to find the error.', err);
       return null;
     }
   }

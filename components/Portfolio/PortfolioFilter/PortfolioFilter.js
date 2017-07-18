@@ -7,107 +7,114 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
+
+/* eslint comma-dangle: [2, "never"] */
+
 import React, { PropTypes } from 'react';
-import { connect } from "react-redux";
-import { urlize } from '../../../src/utils';
+import { connect } from 'react-redux';
 import cx from 'classnames';
+
+import { urlize } from '../../../src/utils';
 import s from './PortfolioFilter.css';
+
 class PortfolioFilter extends React.Component {
-    constructor(props) {
-        super(props);
+  static propTypes = {
+    portfolio: PropTypes.shape({
+      title: PropTypes.string,
+      subtitle: PropTypes.string,
+      all: PropTypes.string,
+      filters: PropTypes.array,
+      elements: PropTypes.array
+    })
+  };
 
-        this.state = {
-            allTopic: {}
-        }
-    }
+  constructor(props) {
+    super(props);
 
-    static propTypes = {
-        className: PropTypes.string,
+    this.state = {
+      allTopic: {}
     };
+  }
 
-    componentDidMount() {
-    //window.componentHandler.upgradeElement(this.root);
-    }
+  componentDidMount() {
+  }
 
-    componentWillUnmount() {
-    //window.componentHandler.downgradeElements(this.root);
-    }
+  componentWillUnmount() {
+  }
 
-    render() {
-        let filters = this.props.portfolio && this.props.portfolio.filters || null;
+  render() {
+    const filters = (this.props.portfolio && this.props.portfolio.filters) || null;
 
-        if( !filters ) return <div className="spinner"></div>;
+    if (!filters) return <div className="spinner" />;
 
-            // Prepare filter tabs
-        let tabs = filters.map((filter, i) => {
-                return (
-                    <li className="nav-item" key={filter.id}>
-                        <a
-                            className={"nav-link" + (!i? " active":"")}
-                            id="home-tab"
-                            data-toggle="tab"
-                            href={`#${filter.id}`}
-                            role="tab" aria-controls={filter.id}
-                            aria-expanded={!i?"true":"false"}
-                            onClick={() => this.state.allTopic[filter.id].click()}
-                        >
-                            {filter.name}
-                        </a>
-                    </li>
-                );
-            }),
+      // Prepare filter tabs
+    const tabs = filters.map((filter, i) => (
+      <li className="nav-item" key={filter.id}>
+        <a
+          className={`nav-link${!i ? ' active' : ''}`}
+          id="home-tab"
+          data-toggle="tab"
+          href={`#${filter.id}`}
+          role="tab" aria-controls={filter.id}
+          aria-expanded={!i ? 'true' : 'false'}
+          onClick={() => this.state.allTopic[filter.id].click()}
+        >
+          {filter.name}
+        </a>
+      </li>
+    ));
 
-            // Prepare filter buttons
-            buttons = filters.map((filter, i) => {
+    // Prepare filter buttons
+    const buttons = filters.map((filter, i) => {
+      // Prepare one topic
+      const topics = filter.topics.map((topic, j) => (
+        <button
+          type="button"
+          className="control btn btn-secondary btn-sm mx-2 mb-4"
+          data-filter={`.${urlize(topic)}`}
+          key={topic}
+          ref={(t) => {
+            if (!j) this.state.allTopic[filter.id] = t;
+            return null;
+          }}
+        >
+          {!j ? this.props.portfolio.all : topic}
+        </button>
+      ));
 
-                // Prepare one topic
-                let topics = filter.topics.map((topic, i) => {
-                    return (
-                        <button
-                            type="button"
-                            className="control btn btn-secondary btn-sm mx-2 mb-4"
-                            data-filter={`.${ urlize( topic )}`}
-                            key={topic}
-                            ref={ topic => !i? this.state.allTopic[filter.id] = topic : null}
-                        >
-                            {!i?this.props.portfolio.all:topic}
-                        </button>
-                    )
-                });
+      // Collect topics
+      return (
+        <div
+          role="tabpanel"
+          className={cx('tab-pane', `fade${!i ? ' active show' : ''}`, s.tabPane)}
+          id={filter.id}
+          key={filter.id}
+          aria-labelledby={`${filter.id}_tab`}
+          aria-expanded={!i ? 'true' : 'false'}
+        >
+          <div className="controls mt-3">
+            {topics}
+          </div>
+        </div>
+      );
+    });
 
-                // Collect topics
-                return (
-                    <div 
-                        role="tabpanel"
-                        className={"tab-pane fade" + (!i?" active show":"")}
-                        id={filter.id}
-                        key={filter.id}
-                        aria-labelledby={filter.id+"_tab"}
-                        aria-expanded={!i?"true":"false"}
-                    >
-                        <div className="controls mt-3">
-                            {topics}
-                        </div>
-                    </div>
-                );
-            });
-
-        // Collect tabs and buttons
-        return (
-            <div>
-                <ul className="nav nav-tabs" id="portfolio-group" role="tablist">
-                    { tabs }
-                </ul>
-                <div className="tab-content" id="myTabContent">
-                    { buttons }
-                </div>
-            </div>
-        );
-    }
+    // Collect tabs and buttons
+    return (
+      <div>
+        <ul className="nav nav-tabs" id="portfolio-group" role="tablist">
+          { tabs }
+        </ul>
+        <div className="tab-content" id="myTabContent">
+          { buttons }
+        </div>
+      </div>
+    );
+  }
 }
 
 function mapStateToProps({ portfolio }) {
-    return { portfolio };
+  return { portfolio };
 }
 
 export default connect(mapStateToProps)(PortfolioFilter);

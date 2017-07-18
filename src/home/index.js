@@ -9,23 +9,20 @@
  */
 
 import React, { PropTypes } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Layout from '../../components/Layout';
 import Carousel from '../../components/Carousel';
 import Portfolio from '../../components/Portfolio';
 import Footer from '../../components/Footer';
 import s from './styles.css';
-import { fetchImages, fetchFrames } from '../actions'
+import { fetchImages, fetchFrames } from '../actions';
 
 class HomePage extends React.Component {
 
   static propTypes = {
-    articles: PropTypes.arrayOf(PropTypes.shape({
-      url: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-    }).isRequired).isRequired,
+    fetchImages: PropTypes.func.isRequired,
+    fetchFrames: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -43,11 +40,10 @@ class HomePage extends React.Component {
       </div>
     );
   }
-
 }
 
-function mapDispatchToProps( dispatch ) {
-    return bindActionCreators({ fetchImages, fetchFrames }, dispatch );
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchImages, fetchFrames }, dispatch);
 }
 
-export default connect(null,mapDispatchToProps)(HomePage);
+export default connect(null, mapDispatchToProps)(HomePage);

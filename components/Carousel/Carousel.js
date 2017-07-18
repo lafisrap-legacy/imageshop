@@ -8,87 +8,92 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* eslint comma-dangle: [2, "never"] */
+
 import React, { PropTypes } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import cx from 'classnames';
 import s from './Carousel.css';
 import Canvas from './Canvas';
 import Panel from './Panel';
 
 class Carousel extends React.Component {
-    constructor(props) {
-        super(props);
+  static propTypes = {
+    carousel: PropTypes.shape({
+      frameName: PropTypes.string,
+      imageId: PropTypes.number,
+      backgroundImage: PropTypes.string
+    })
+  };
 
-        this.pages = [];
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            test: "TEST1"
-        }
-    }
+    this.pages = [];
 
-    static propTypes = {
-        className: PropTypes.string,
-    };
+    this.state = {};
+  }
 
-    componentDidUpdate() {
-        $(".portfolio-carousel").owlCarousel({
-            singleItem: true,
-            navigation: true,
-            pagination: false,
-            navigationText: [
-                "<i class='fa fa-angle-left'></i>",
-                "<i class='fa fa-angle-right'></i>"
-            ],
-            autoHeight: true,
-            mouseDrag: false,
-            touchDrag: false,
-            transitionStyle: "fadeUp"
-        });
+  componentDidUpdate() {
+    global.$('.portfolio-carousel').owlCarousel({
+      singleItem: true,
+      navigation: true,
+      pagination: false,
+      navigationText: [
+        "<i class='fa fa-angle-left'></i>",
+        "<i class='fa fa-angle-right'></i>"
+      ],
+      autoHeight: true,
+      mouseDrag: false,
+      touchDrag: false,
+      transitionStyle: 'fadeUp'
+    });
 
-        this.pages.map( page => page.style.paddingTop = page.style.paddingBottom = (screen.height - page.clientHeight) / 2 + "px" );
+    this.pages.map((page) => {
+      const padding = `${(screen.height - page.clientHeight) / 2}px`;
+      const p = page;
 
-        //window.componentHandler.upgradeElement(this.root);
-      }
+      p.style.paddingTop = padding;
+      p.style.paddingBottom = padding;
 
-      componentWillUnmount() {
-        //window.componentHandler.downgradeElements(this.root);
-      }
+      return null;
+    });
+  }
 
-      render() {
-        if( !this.props.carousel.length ) {
-            
-            var carousel = <div className="spinner"></div>;
+  render() {
+    let carousel = null;
+    const c = this.props.carousel;
 
-        } else {
-            var carousel = this.props.carousel.map( page => {
-                return (
-                    <div
-                        className={ cx("page item", s.page) }
-                        key={page.imageId + "-" + page.frameName}
-                        style={{"backgroundImage": `url(${page.backgroundImage})`}}
-                        ref={ page => this.pages.push( page ) }
-                    >
-                        <div className={ cx("container-fluid", s.container) }>
-                            <div className={ cx("row h-100", s.row) }>
-                                <Panel imageId={ page.imageId } frameName={ page.frameName } />
-                                <Canvas imageId={ page.imageId } frameName={ page.frameName } />
-                            </div>
-                        </div>
-                    </div>
-                );
-            });
-        }
-
-        return (
-            <div className="portfolio-carousel wow fadeIn owl-carousel owl-theme" id="carousel">
-                { carousel }
+    if (!c.length) {
+      carousel = <div className="spinner" />;
+    } else {
+      carousel = c.map(page => (
+        <div
+          className={cx('page item', s.page)}
+          key={`${page.imageId}-${page.frameName}`}
+          style={{ backgroundImage: `url(${page.backgroundImage})` }}
+          ref={p => this.pages.push(p)}
+        >
+          <div className={cx('container-fluid', s.container)}>
+            <div className={cx('row h-100', s.row)}>
+              <Panel imageId={page.imageId} frameName={page.frameName} />
+              <Canvas imageId={page.imageId} frameName={page.frameName} />
             </div>
-        );
+          </div>
+        </div>
+      ));
     }
+
+    return (
+      <div className="portfolio-carousel wow fadeIn owl-carousel owl-theme" id="carousel">
+        {carousel}
+      </div>
+    );
+  }
 }
 
 export function mapStateToProps({ carousel }) {
-    return { carousel };
+  return { carousel };
 }
 
 export default connect(mapStateToProps)(Carousel);

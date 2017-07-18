@@ -8,48 +8,49 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* eslint comma-dangle: [2, "never"] */
+
 import React, { PropTypes } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import cx from 'classnames';
 import s from './Panel.css';
 
 class Panel extends React.Component {
 
   static propTypes = {
-    className: PropTypes.string,
+    images: PropTypes.objectOf(PropTypes.object),
+    frames: PropTypes.objectOf(PropTypes.object),
+    frameName: PropTypes.string,
+    imageId: PropTypes.string
   };
 
   componentDidMount() {
-    //window.componentHandler.upgradeElement(this.root);
   }
 
   componentWillUnmount() {
-    //window.componentHandler.downgradeElements(this.root);
   }
 
   render() {
-    if( !this.props.images ) return <div className="spinner"></div>;
+    if (!this.props.images) return <div className="spinner" />;
 
-    let image = this.props.images[this.props.imageId],
-        frame = this.props.frames[this.props.frameName];
-
-    console.assert( image, `Image Id ${this.props.imageId} not found for carousel.`)
-    console.assert( frame, `Frame ${this.props.frameName} not found for carousel.`)
+    const image = this.props.images[this.props.imageId];
+    const frame = this.props.frames[this.props.frameName];
 
     return (
-        <div className="col-md-5 push-md-7 my-auto">
-            <div className="project-details">
-                <span className="project-name">{ image.name }</span>
-                <span className="project-description">{ image.description }</span>
-                <hr className="colored" />
-            </div>
+      <div className="col-md-5 push-md-7 my-auto">
+        <div className={cx('project-details', s.projectDetails)}>
+          <span className="project-name">{image.name}</span>
+          <span className="project-description">{image.description}</span>
+          <span className="project-frame">{frame.maxNumber}</span>
+          <hr className="colored" />
         </div>
+      </div>
     );
   }
 }
 
 function mapStateToProps({ images, frames }) {
-    return { images, frames };
+  return { images, frames };
 }
 
 export default connect(mapStateToProps)(Panel);

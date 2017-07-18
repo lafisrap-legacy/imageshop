@@ -8,9 +8,12 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* eslint comma-dangle: [2, "never"] */
+
 import React, { PropTypes } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import cx from 'classnames';
+
 import s from './Portfolio.css';
 import PortfolioFilter from './PortfolioFilter';
 import PortfolioGrid from './PortfolioGrid';
@@ -18,43 +21,46 @@ import PortfolioGrid from './PortfolioGrid';
 class Portfolio extends React.Component {
 
   static propTypes = {
-    className: PropTypes.string,
+    portfolio: PropTypes.shape({
+      title: PropTypes.string,
+      subtitle: PropTypes.string,
+      all: PropTypes.string,
+      filters: PropTypes.array,
+      elements: PropTypes.array
+    })
   };
 
   componentDidUpdate() {
-    $('.mix').magnificPopup({
-        type: 'image',
-        image: {
-            titleSrc: 'title'
-        }
+    global.$('.mix').magnificPopup({
+      type: 'image',
+      image: {
+        titleSrc: 'title'
+      }
     });
 
-    var containerEl = document.querySelector('#portfolioList');
-    var mixer = mixitup(containerEl);
-    //window.componentHandler.upgradeElement(this.root);
+    global.mixitup(document.querySelector('#portfolioList'));
   }
 
   componentWillUnmount() {
-    //window.componentHandler.downgradeElements(this.root);
   }
 
   render() {
     return (
-        <section className="page-section">
-            <div className="container text-center wow fadeIn">
-                <h2>Portfolio</h2>
-                <hr className="colored" />
-                <p>Here are some other projects that we´ve worked on.</p>
-                <PortfolioFilter />
-                <PortfolioGrid />
-            </div>
-        </section>
+      <section className={cx('page-section', s.pageSection)}>
+        <div className="container text-center wow fadeIn">
+          <h2>Portfolio</h2>
+          <hr className="colored" />
+          <p>Here are some other projects that we´ve worked on.</p>
+          <PortfolioFilter />
+          <PortfolioGrid />
+        </div>
+      </section>
     );
   }
 }
 
 function mapStateToProps({ portfolio }) {
-    return { portfolio };
+  return { portfolio };
 }
 
 export default connect(mapStateToProps)(Portfolio);
