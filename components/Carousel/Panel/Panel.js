@@ -21,7 +21,7 @@ class Panel extends React.Component {
     images: PropTypes.objectOf(PropTypes.object),
     frames: PropTypes.objectOf(PropTypes.object),
     frameName: PropTypes.string,
-    imageId: PropTypes.string
+    imageId: PropTypes.number
   };
 
   componentDidMount() {

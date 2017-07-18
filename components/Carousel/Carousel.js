@@ -19,11 +19,12 @@ import Panel from './Panel';
 
 class Carousel extends React.Component {
   static propTypes = {
-    carousel: PropTypes.shape({
-      frameName: PropTypes.string,
-      imageId: PropTypes.number,
-      backgroundImage: PropTypes.string
-    })
+    carousel: PropTypes.arrayOf(
+      PropTypes.shape({
+        frameName: PropTypes.string,
+        imageId: PropTypes.number,
+        backgroundImage: PropTypes.string
+      }))
   };
 
   constructor(props) {

@@ -32,7 +32,9 @@ class PortfolioImage extends React.Component {
   };
 
   componentDidMount() {
-    this.mix.height = this.mix.clientWidth * WIDTH_HEIGHT_RATION;
+    if (this.mix) {
+      this.mix.height = this.mix.clientWidth * WIDTH_HEIGHT_RATION;
+    }
   }
 
   componentWillUnmount() {
@@ -47,7 +49,7 @@ class PortfolioImage extends React.Component {
     const filters = el.filters;
     const title = el.captionTitle;
     const subtitle = el.captionCategory;
-    const name = el.name;
+    const name = el.captionTitle;
     const image = this.props.images[imageId];
 
     return (

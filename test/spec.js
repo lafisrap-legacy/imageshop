@@ -1,6 +1,8 @@
 
-import rewire from 'rewire';
 import { expect } from 'chai';
+import { mount, shallow } from 'enzyme';
+import React from 'react';
+import rewire from 'rewire';
 
 global.YAML = require('yamljs');
 
@@ -19,6 +21,13 @@ const fillCarousel = store.__get__('fillCarousel');
 const reducers = store.__get__('reducers');
 
 const urlize = utils.__get__('urlize');
+
+// Components to be tested
+const PortfolioImageWrapper = rewire('../components/Portfolio/PortfolioImage');
+const PortfolioImage = PortfolioImageWrapper.__get__('PortfolioImage');
+
+const PortfolioGridWrapper = rewire('../components/Portfolio/PortfolioGrid');
+const PortfolioGrid = PortfolioGridWrapper.__get__('PortfolioGrid');
 
 
 process.env.NODE_ENV = 'testing';
@@ -614,7 +623,6 @@ const testData = {
     out: 'digital_e65e'
   }],
 
-
   fetchFrames: [{
     in: 'digital',
     out: 'digital_e65e'
@@ -676,129 +684,74 @@ describe('Image Shop Test Suite, ', () => {
     });
   });
 
-/*
-Comming up ... How to test reducers? Encyme?
-
-  describe('reducers, ', () => {
-    it('FETCH_IMAGES', () => {
-      testData.fetchImages.map(d => expect(urlize(d.in)).to.be.eql(d.out));
-    });
-    it('FETCH_FRAMES', () => {
-      testData.fetchFrames.map(d => expect(urlize(d.in)).to.be.eql(d.out));
-    });
-  });
-*/
-});
-
-/**
- * React Static Boilerplate
- * https://github.com/kriasoft/react-static-boilerplate
- *
- * Copyright © 2015-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
-
-/*
-import React from 'react';
-import { connect } from 'react-redux';
-import { expect, assert } from 'chai'
-import { shallowWithStore } from 'enzyme-redux';
-import { createMockStore } from 'redux-test-utils';
-
-import Carousel from '../components/Carousel'
-import Panel from '../components/Carousel/Panel'
-
-describe('example shallowWithStore', () => {
-  describe('state', () => {
-    it('works', () => {
-      const expectedState = { test: 'ABC' };
-      const mapStateToProps = (carousel) => ({
-        carousel,
+  describe('components: ', () => {
+    describe('PortfolioImage, ', () => {
+      it('spinner div available', () => {
+        const wrapper = mount(<PortfolioImage />);
+        expect(wrapper.contains(<div className="spinner" />)).to.equal(true);
       });
-      const ConnectedComponent = connect(mapStateToProps)(Carousel);
-      const component = shallowWithStore(<ConnectedComponent />, createMockStore(expectedState));
-      expect(component.props().carousel).to.equal(expectedState);
-      console.log(component.find('.container-fluid'));
-      expect(component.find(Panel)).to.have.length(1);
-    });
-  });
 
-  describe('dispatch', () => {
-    it('works', () => {
-      const action = {
-        type: 'type',
-      };
-      const mapDispatchToProps = (dispatch) => ({
-        dispatchProp() {
-          dispatch(action);
-        },
+      it('find 8 strings', () => {
+        const props = {
+          images: {
+            1001: {
+              imageId: 1001,
+              largeImage: '/startbootstrap/img/gallery/bird.jpg',
+              mediumImage: '/startbootstrap/img/gallery/bird.jpg',
+              smallImage: '/startbootstrap/img/gallery/bird.jpg',
+              alt: 'Alternative text',
+              name: 'bird',
+              description: 'bird, bird, bird, bird, bird',
+              frames: [
+                'Digital'
+              ],
+              backgroundImage: '/startbootstrap/img/backgrounds/bg-1.jpg'
+            }
+          },
+          element: {
+            imageId: 1001,
+            captionTitle: 'bird',
+            captionCategory: '...',
+            filters: [
+              'Nature_2b2f',
+              'Animals',
+              'Time_e530',
+              'Spring'
+            ]
+          }
+        };
+        const wrapper = mount(<PortfolioImage {...props} />);
+        expect(wrapper.find('.text-title')).to.have.length(1);
+        expect(wrapper.findWhere(n => typeof n.type() === 'string')).to.have.length(8);
       });
-      const store = createMockStore();
+    });
 
-      const ConnectedComponent = connect(undefined, mapDispatchToProps)(Carousel);
-      const component = shallowWithStore(<ConnectedComponent />, store);
-      component.props().dispatchProp();
-      expect(store.isActionDispatched(action)).to.equal(true);
+    describe('PortfolioGrid, ', () => {
+      it('spinner div available', () => {
+        const wrapper = shallow(<PortfolioGrid />);
+        expect(wrapper.contains(<div className="spinner" />)).to.equal(true);
+      });
+
+      it('checking for portfolioList', () => {
+        const props = {
+          portfolio: {
+            elements: [{
+              imageId: 1001,
+              captionTitle: 'bird',
+              captionCategory: '...',
+              filters: [
+                'Nature_2b2f',
+                'Animals',
+                'Time_e530',
+                'Spring'
+              ]
+            }]
+          }
+        };
+        const wrapper = shallow(<PortfolioGrid {...props} />);
+        expect(wrapper.contains(<div className="spinner" />)).to.equal(false);
+      });
     });
   });
 });
-*/
-/*
-import React from 'react'
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import { mount, shallow } from 'enzyme'
-import { expect, assert } from 'chai'
-import Carousel from '../components/Carousel'
-
-const reducer = function(state, action) {
-  switch(action.type) {
-  case 'DEMO_ACTION':
-      return state.concat(action.payload);
-  }
-
-  return state;
-}
-const wrapper = shallow(<Provider store={createStore(reducer)}><Carousel /></Provider>);
-
-describe('<Carousel />', () => {
-  it('renders...', () => {
-    expect(wrapper).to.have.length(1);
-    expect(wrapper.find(Carousel).shallow().find('.fa')).to.have.length(2);
-  });
-});
-
-/*
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-
-import Carousel from '../components/Carousel';
-
-import { expect } from 'chai';
-import { mount, shallow } from 'enzyme';
-
-describe('<Carousel />', () => {
-  it('calls componentDidMount', () => {
-    const wrapper = mount(<Carousel />);
-    expect(Carousel.prototype.componentDidMount.calledOnce).to.equal(true);
-  });
-});
-
-const reducer = function(state, action) {
-  switch(action.type) {
-  case 'DEMO_ACTION':
-      return state.concat(action.payload);
-  }
-
-  return state;
-}
-
-ReactDOM.render(<Provider store={createStore(reducer)}><App /></Provider>,
-  document.getElementById('container'));
-*/
 
