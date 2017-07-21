@@ -52,7 +52,6 @@ class PortfolioFilter extends React.Component {
       <li className="nav-item" key={filter.id}>
         <a
           className={`nav-link${!i ? ' active' : ''}`}
-          id="home-tab"
           data-toggle="tab"
           href={`#${filter.id}`}
           role="tab" aria-controls={filter.id}
@@ -72,7 +71,7 @@ class PortfolioFilter extends React.Component {
           type="button"
           className="control btn btn-secondary btn-sm mx-2 mb-4"
           data-filter={`.${urlize(topic)}`}
-          key={topic}
+          key={urlize(topic)}
           ref={(t) => {
             if (!j) this.state.allTopic[filter.id] = t;
             return null;

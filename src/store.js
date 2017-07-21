@@ -73,7 +73,7 @@ function convertImageData({ title, subtitle, all, images }) {
         portfolio.filters.push({
           id: urlize(filter.name),
           name: filter.name,
-          topics: [urlize(filter.name)].concat(filter.topics),
+          topics: [filter.name].concat(filter.topics),
         });
       } else {
         flt.topics = union(flt.topics, filter.topics);
@@ -86,7 +86,7 @@ function convertImageData({ title, subtitle, all, images }) {
       imageId: image.id,
       captionTitle: image.title,
       captionCategory: '...',
-      filters: [].concat(...image.filters.map(f => [urlize(f.name)].concat(f.topics))),
+      filters: [].concat(...image.filters.map(f => [f.name].concat(f.topics))),
     });
 
     return null;

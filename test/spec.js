@@ -6,12 +6,12 @@ import rewire from 'rewire';
 
 global.YAML = require('yamljs');
 
-// Tested modules
+// Modules to be tested
 const data = rewire('../src/data');
 const store = rewire('../src/store');
 const utils = rewire('../src/utils');
 
-// Private functions to be tested
+// Private functions of modules
 const correctYaml = data.__get__('correctYaml');
 const parseYaml = data.__get__('parseYaml');
 
@@ -29,6 +29,8 @@ const PortfolioImage = PortfolioImageWrapper.__get__('PortfolioImage');
 const PortfolioGridWrapper = rewire('../components/Portfolio/PortfolioGrid');
 const PortfolioGrid = PortfolioGridWrapper.__get__('PortfolioGrid');
 
+const PortfolioFilterWrapper = rewire('../components/Portfolio/PortfolioFilter');
+const PortfolioFilter = PortfolioFilterWrapper.__get__('PortfolioFilter');
 
 process.env.NODE_ENV = 'testing';
 
@@ -122,7 +124,7 @@ const testData = {
             id: 'Nature_2b2f',
             name: 'Nature',
             topics: [
-              'Nature_2b2f',
+              'Nature',
               'Animals'
             ]
           },
@@ -130,7 +132,7 @@ const testData = {
             id: 'Time_e530',
             name: 'Time',
             topics: [
-              'Time_e530',
+              'Time',
               'Spring'
             ]
           }
@@ -141,9 +143,9 @@ const testData = {
             captionTitle: 'bird',
             captionCategory: '...',
             filters: [
-              'Nature_2b2f',
+              'Nature',
               'Animals',
-              'Time_e530',
+              'Time',
               'Spring'
             ]
           }
@@ -282,7 +284,7 @@ const testData = {
             id: 'Nature_2b2f',
             name: 'Nature',
             topics: [
-              'Nature_2b2f',
+              'Nature',
               'Animals'
             ]
           },
@@ -290,7 +292,7 @@ const testData = {
             id: 'Time_e530',
             name: 'Time',
             topics: [
-              'Time_e530',
+              'Time',
               'Spring'
             ]
           }
@@ -301,9 +303,9 @@ const testData = {
             captionTitle: 'bird',
             captionCategory: '...',
             filters: [
-              'Nature_2b2f',
+              'Nature',
               'Animals',
-              'Time_e530',
+              'Time',
               'Spring'
             ]
           }
@@ -393,7 +395,7 @@ const testData = {
             id: 'Nature_2b2f',
             name: 'Nature',
             topics: [
-              'Nature_2b2f',
+              'Nature',
               'Animals'
             ]
           },
@@ -401,7 +403,7 @@ const testData = {
             id: 'Time_e530',
             name: 'Time',
             topics: [
-              'Time_e530',
+              'Time',
               'Spring'
             ]
           }
@@ -412,9 +414,9 @@ const testData = {
             captionTitle: 'bird',
             captionCategory: '...',
             filters: [
-              'Nature_2b2f',
+              'Nature',
               'Animals',
-              'Time_e530',
+              'Time',
               'Spring'
             ]
           }
@@ -692,7 +694,7 @@ describe('Image Shop Test Suite, ', () => {
       });
 
       it('find 8 strings', () => {
-        const props = {
+        const wrapper = mount(<PortfolioImage />).setProps({
           images: {
             1001: {
               imageId: 1001,
@@ -713,14 +715,13 @@ describe('Image Shop Test Suite, ', () => {
             captionTitle: 'bird',
             captionCategory: '...',
             filters: [
-              'Nature_2b2f',
+              'Nature',
               'Animals',
-              'Time_e530',
+              'Time',
               'Spring'
             ]
           }
-        };
-        const wrapper = mount(<PortfolioImage {...props} />);
+        });
         expect(wrapper.find('.text-title')).to.have.length(1);
         expect(wrapper.findWhere(n => typeof n.type() === 'string')).to.have.length(8);
       });
@@ -733,25 +734,56 @@ describe('Image Shop Test Suite, ', () => {
       });
 
       it('checking for portfolioList', () => {
-        const props = {
+        const wrapper = shallow(<PortfolioGrid />).setProps({
           portfolio: {
             elements: [{
               imageId: 1001,
               captionTitle: 'bird',
               captionCategory: '...',
               filters: [
-                'Nature_2b2f',
+                'Nature',
                 'Animals',
-                'Time_e530',
+                'Time',
                 'Spring'
               ]
             }]
           }
-        };
-        const wrapper = shallow(<PortfolioGrid {...props} />);
-        expect(wrapper.contains(<div className="spinner" />)).to.equal(false);
+        });
+        expect(wrapper.find('#portfolioList').hasClass('clearfix')).to.equal(true);
+      });
+    });
+
+    describe('PortfolioFilter, ', () => {
+      it('spinner div available', () => {
+        const wrapper = mount(<PortfolioFilter />);
+        expect(wrapper.contains(<div className="spinner" />)).to.equal(true);
+      });
+
+      it('checking tabs', () => {
+        const wrapper = mount(<PortfolioFilter />).setProps({
+          portfolio: {
+            filters: [
+              {
+                id: '1',
+                name: 'Nature',
+                topics: [
+                  'Animals'
+                ]
+              },
+              {
+                id: '2',
+                name: 'Time',
+                topics: [
+                  'Spring'
+                ]
+              }
+            ]
+          }
+        });
+        expect(wrapper.find('.nav-tabs li')).to.have.length(2);
+        expect(wrapper.find('.nav-tabs li a').at(0).text()).to.equal("Nature");
+        expect(wrapper.find('.nav-tabs li a').at(1).text()).to.equal("Time");
       });
     });
   });
 });
-
