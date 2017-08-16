@@ -15,7 +15,7 @@ hr {
     border-bottom: 1px solid white;
 }
 hr.colored {
-    border-color: #EF4035;
+    border-color: #362A83;
 }
 @media (min-width: 992px) {
     hr {
@@ -51,14 +51,14 @@ body {
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 a {
-    color: #EF4035;
+    color: #362A83;
     -webkit-transition: all .5s;
     -moz-transition: all .5s;
     transition: all .5s;
 }
 a:hover,
 a:focus {
-    color: #c81b10;
+    color: #A01F80;
     text-decoration: none;
 }
 p {
@@ -136,7 +136,7 @@ h6 {
 #mainNav .navbar-collapse .navbar-nav > .nav-item > .nav-link.active,
 #mainNav .navbar-collapse .navbar-nav > .nav-item > .nav-link.active:hover,
 #mainNav .navbar-collapse .navbar-nav > .nav-item > .nav-link.active:focus {
-    color: #EF4035;
+    color: #362A83;
 }
 @media (min-width: 992px) {
     #mainNav {
@@ -163,7 +163,7 @@ h6 {
     #mainNav .navbar-collapse .navbar-nav > .nav-item > .nav-link.active,
     #mainNav .navbar-collapse .navbar-nav > .nav-item > .nav-link.active:hover,
     #mainNav .navbar-collapse .navbar-nav > .nav-item > .nav-link.active:focus {
-        color: #EF4035;
+        color: #362A83;
         border-radius: 0;
         background-color: white;
         border-radius: 5px;
@@ -582,7 +582,7 @@ header.video .scroll-down {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #EF4035;
+    background: #362A83;
 }
 .portfolio-grid .mix .portfolio-wrapper .caption .caption-text {
     position: relative;
@@ -718,7 +718,7 @@ header.video .scroll-down {
 .signup-form .input-group .input-group-btn .btn-primary {
     border: 0;
     border-radius: 0;
-    background-color: #EF4035;
+    background-color: #362A83;
     font-size: 1rem;
 }
 .signup-form .input-group .input-group-btn .btn-primary:hover {
@@ -769,7 +769,7 @@ header.video .scroll-down {
     opacity: 1;
 }
 .floating-label-form-group-with-focus label {
-    color: #EF4035;
+    color: #362A83;
 }
 form .row:first-child .floating-label-form-group {
     border-top: 1px solid #e1e1e1;
@@ -824,7 +824,7 @@ footer.footer .copyright {
 }
 .btn-primary:hover,
 .btn-primary:focus {
-    color: #EF4035;
+    color: #362A83;
     border-color: white;
     background-color: white;
 }
@@ -835,8 +835,8 @@ footer.footer .copyright {
 .btn-secondary:hover,
 .btn-secondary:focus {
     color: white;
-    border-color: #EF4035;
-    background-color: #EF4035;
+    border-color: #362A83;
+    background-color: #362A83;
 }
 button:hover {
     cursor: pointer;
@@ -854,20 +854,20 @@ button:hover {
 }
 .btn-full-width:hover {
     color: white;
-    background-color: #EF4035;
+    background-color: #362A83;
 }
 .btn-full-width:focus {
     color: white;
 }
 .text-primary {
-    color: #EF4035 !important;
+    color: #362A83 !important;
 }
 a.text-primary {
-    color: #EF4035 !important;
+    color: #362A83 !important;
 }
 a.text-primary:hover,
 a.text-primary:focus {
-    color: #c81b10 !important;
+    color: #A01F80 !important;
 }
 .bg-inverse {
     background-color: #222 !important;
@@ -888,7 +888,7 @@ a.text-primary:focus {
     text-align: center;
     color: white !important;
     border-radius: 0 !important;
-    background-color: #EF4035 !important;
+    background-color: #362A83 !important;
     -webkit-transition: all .5s;
     -moz-transition: all .5s;
     transition: all .5s;

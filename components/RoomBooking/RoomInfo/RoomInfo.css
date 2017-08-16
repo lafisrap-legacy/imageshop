@@ -8,46 +8,28 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-.mix img {
-  width: 345px;
-  border-radius: 20px;
+.roomHeader {
+  text-align: left;
 }
 
-.wrapper {
-  border-radius: 20px;
+.headerItem {
+  font-family: "Raleway";
+  text-align: left;
+  text-transform: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 1em;
+  font-weight: normal;
 }
 
-.img {
-  border-radius: 20px;
-}
-
-.captionText {
-  padding-left: 12px !important;
-  padding-right: 12px !important;
-}
-
-.title, .price {
+.roomName {
+  text-transform: none;
+  font-size: 2.2em;
   font-weight: bold;
-  font-size: 16px;
 }
 
-.frameOption, .subtitle {
-  font-size: 10px;
-  margin-left: 6px;
-  margin-top: 6px;
+.roomImage {
+  border-radius: 15px;
+  margin: 5px;
 }
 
-.button {
-  border: 1px solid rgba(255,255,255,0.4);
-  background-color: #661205;
-  border-radius: 5px;
-  padding: 4px 7px;
-}
-
-.button i {
-  font-size: 18px;
-}
-
-.background {
-  background: #881710 !important;
-}

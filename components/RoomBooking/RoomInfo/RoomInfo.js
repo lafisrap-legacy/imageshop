@@ -16,8 +16,7 @@ import cx from 'classnames';
 import { isEmpty } from 'lodash';
 
 import s from './RoomInfo.css';
-
-const WIDTH_HEIGHT_RATION = 0.663;
+import { API_BASE_URL } from '../../../src/actions';
 
 class RoomInfo extends React.Component {
 
@@ -46,15 +45,36 @@ class RoomInfo extends React.Component {
               href={`#RoomInfo__collapse${index}`}
               aria-expanded="true"
               aria-controls={`RoomInfo__collapse${index}`}
+              className={cx(s.roomHeader)}
             >
-              {info.name}  
+              <div className="row">
+                <div className="col-lg-4 col-xs-12">
+                  <span className={cx(s.headerItem, s.roomName)}>{info.name}</span>
+                  <br />
+                  <span className={cx(s.headerItem, s.roomCapacity)}>Capacity: {info.capacity}</span>
+                  <span className={cx(s.headerItem, s.roomSize)}>{info.size}</span>
+                </div>
+                <div className="col-lg-8 col-xs-12">
+                  <span>Time Schedule</span>
+                </div>
+              </div>
             </a>
           </h5>
         </div>
 
         <div id={`RoomInfo__collapse${index}`} className="collapse" role="tabpanel" aria-labelledby={`room ${index}`}>
           <div className="card-block">
-            {JSON.stringify(info)}
+            <div className="row">
+              <div className="col-lg-9 col-xs-12">
+                <div className={cx(s.headerItem, s.roomName)}>Location</div>
+                <div className={cx(s.headerItem)}>{info.location}</div>
+                <div className={cx(s.headerItem, s.roomName)}>Equipment</div>
+                <div className={cx(s.headerItem)}>{info.equipment.join(", ")}</div>
+              </div>
+              <div className="col-lg-3 col-xs-12">
+                {info.images.map(image => <img src={`${API_BASE_URL}/${image}`} className={cx("img", "img-fluid", s.roomImage)} />)}
+              </div>
+            </div>
           </div>
         </div>
       </div>
