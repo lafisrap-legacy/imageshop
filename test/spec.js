@@ -32,7 +32,19 @@ const PortfolioGrid = PortfolioGridWrapper.__get__('PortfolioGrid');
 const PortfolioFilterWrapper = rewire('../components/Portfolio/PortfolioFilter');
 const PortfolioFilter = PortfolioFilterWrapper.__get__('PortfolioFilter');
 
-process.env.NODE_ENV = 'testing';
+const PortfolioWrapper = rewire('../components/Portfolio');
+const Portfolio = PortfolioWrapper.__get__('Portfolio');
+
+const CarouselWrapper = rewire('../components/Carousel');
+const Carousel = CarouselWrapper.__get__('Carousel');
+
+const CanvasWrapper = rewire('../components/Carousel/Canvas');
+const Canvas = CanvasWrapper.__get__('Canvas');
+
+const PanelWrapper = rewire('../components/Carousel/Panel');
+const Panel = PanelWrapper.__get__('Panel');
+
+process.env.NODE_ENV = 'test';
 
 const testData = {
   //---------------------------------------------------------------------------
@@ -759,7 +771,7 @@ describe('Image Shop Test Suite, ', () => {
         expect(wrapper.contains(<div className="spinner" />)).to.equal(true);
       });
 
-      it('checking tabs', () => {
+      it('checking tabs and filters', () => {
         const wrapper = mount(<PortfolioFilter />).setProps({
           portfolio: {
             filters: [
@@ -767,6 +779,7 @@ describe('Image Shop Test Suite, ', () => {
                 id: '1',
                 name: 'Nature',
                 topics: [
+                  'Nature',
                   'Animals'
                 ]
               },
@@ -774,15 +787,172 @@ describe('Image Shop Test Suite, ', () => {
                 id: '2',
                 name: 'Time',
                 topics: [
+                  'Time',
                   'Spring'
                 ]
               }
-            ]
+            ],
+            all: 'All'
           }
         });
+
         expect(wrapper.find('.nav-tabs li')).to.have.length(2);
-        expect(wrapper.find('.nav-tabs li a').at(0).text()).to.equal("Nature");
-        expect(wrapper.find('.nav-tabs li a').at(1).text()).to.equal("Time");
+        expect(wrapper.find('.nav-tabs li a').at(0).text()).to.equal('Nature');
+        expect(wrapper.find('.nav-tabs li a').at(1).text()).to.equal('Time');
+        expect(wrapper.find('.tab-content [role="tabpanel"]')).to.have.length(2);
+        expect(wrapper.find('.tab-content button').at(0).text()).to.equal('All');
+        expect(wrapper.find('.tab-content button').at(1).text()).to.equal('Animals');
+        expect(wrapper.find('.tab-content button').at(2).text()).to.equal('All');
+        expect(wrapper.find('.tab-content button').at(3).text()).to.equal('Spring');
+      });
+    });
+
+    describe('Portfolio, ', () => {
+      it('spinner div available', () => {
+        const wrapper = shallow(<Portfolio />);
+        expect(wrapper.contains(<div className="spinner" />)).to.equal(true);
+      });
+
+      it('checking title and subtitle', () => {
+        const wrapper = shallow(<Portfolio />).setProps({
+          portfolio: {
+            title: 'Title1',
+            subtitle: 'Subtitle1'
+          }
+        });
+
+        expect(wrapper.find('.page-section h2').text()).to.equal('Title1');
+        expect(wrapper.find('.page-section p').text()).to.equal('Subtitle1');
+      });
+    });
+
+    describe('Carousel, ', () => {
+      it('spinner div available', () => {
+        const wrapper = shallow(<Carousel />);
+        expect(wrapper.contains(<div className="spinner" />)).to.equal(true);
+      });
+
+      it('items', () => {
+        const wrapper = shallow(<Carousel />).setProps({
+          carousel: [{
+            backgroundImage: '/startbootstrap/img/backgrounds/bg-1.jpg',
+            frameName: 'Digital_0b4a',
+            imageId: 1001
+          }, {
+            backgroundImage: '/startbootstrap/img/backgrounds/bg-1.jpg',
+            frameName: 'Standard_Photo_Paper_ae2e',
+            imageId: 1002
+          }, {
+            backgroundImage: '/startbootstrap/img/backgrounds/bg-1.jpg',
+            frameName: 'Premium_Photo_Paper_386d',
+            imageId: 1003
+          }]
+        });
+
+        expect(wrapper.find('.portfolio-carousel .item')).to.have.length(3);
+        expect(wrapper.find('Connect(Panel) [frameName="Digital_0b4a"]')).to.have.length(1);
+        expect(wrapper.find('Connect(Panel) [frameName="Standard_Photo_Paper_ae2e"]')).to.have.length(1);
+        expect(wrapper.find('Connect(Panel) [frameName="Premium_Photo_Paper_386d"]')).to.have.length(1);
+        expect(wrapper.find('Connect(Canvas) [frameName="Digital_0b4a"]')).to.have.length(1);
+        expect(wrapper.find('Connect(Canvas) [frameName="Standard_Photo_Paper_ae2e"]')).to.have.length(1);
+        expect(wrapper.find('Connect(Canvas) [frameName="Premium_Photo_Paper_386d"]')).to.have.length(1);
+      });
+    });
+
+    describe('Canvas, ', () => {
+      it('spinner div available', () => {
+        const wrapper = shallow(<Canvas />);
+        expect(wrapper.contains(<div className="spinner" />)).to.equal(true);
+      });
+
+      it('device mockups', () => {
+        const wrapper = shallow(<Canvas />).setProps({
+          frames: {
+            Digital_0b4a: {
+              name: 'Digital',
+              formats: [
+                {
+                  name: 'Web only (1600 x 1000px)',
+                  description: '\'Some words to the format\'\n',
+                  price: 25
+                }
+              ],
+              maxNumber: 1,
+              canvas: 'golden_frame',
+              frameId: 'Digital_0b4a'
+            }
+          },
+          images: {
+            1001: {
+              imageId: 1001,
+              largeImage: '/startbootstrap/img/gallery/bird.jpg',
+              mediumImage: '/startbootstrap/img/gallery/bird.jpg',
+              smallImage: '/startbootstrap/img/gallery/bird.jpg',
+              alt: 'Alternative text',
+              name: 'bird',
+              description: 'bird, bird, bird, bird, bird',
+              frames: [
+                'Digital'
+              ],
+              backgroundImage: '/startbootstrap/img/backgrounds/bg-1.jpg'
+            }
+          },
+          imageId: 1001,
+          frameName: 'Digital_0b4a'
+
+        });
+
+        expect(wrapper.find('.device-mockup').hasClass('Digital_0b4a')).to.equal(true);
+        expect(wrapper.find('.device-mockup').hasClass('golden_frame')).to.equal(true);
+      });
+    });
+
+    describe('Panel, ', () => {
+      it('spinner div available', () => {
+        const wrapper = shallow(<Panel />);
+        expect(wrapper.contains(<div className="spinner" />)).to.equal(true);
+      });
+
+      it('frame info', () => {
+        const wrapper = shallow(<Panel />).setProps({
+          frames: {
+            Digital_0b4a: {
+              name: 'Digital',
+              formats: [
+                {
+                  name: 'Web only (1600 x 1000px)',
+                  description: '\'Some words to the format\'\n',
+                  price: 25
+                }
+              ],
+              maxNumber: 1,
+              canvas: 'golden_frame',
+              frameId: 'Digital_0b4a'
+            }
+          },
+          images: {
+            1001: {
+              imageId: 1001,
+              largeImage: '/startbootstrap/img/gallery/bird.jpg',
+              mediumImage: '/startbootstrap/img/gallery/bird.jpg',
+              smallImage: '/startbootstrap/img/gallery/bird.jpg',
+              alt: 'Alternative text',
+              name: 'bird',
+              description: 'bird, bird, bird, bird, bird',
+              frames: [
+                'Digital'
+              ],
+              backgroundImage: '/startbootstrap/img/backgrounds/bg-1.jpg'
+            }
+          },
+          imageId: 1001,
+          frameName: 'Digital_0b4a'
+
+        });
+
+        expect(wrapper.find('.project-name').text()).to.equal('bird');
+        expect(wrapper.find('.project-description').text()).to.equal('bird, bird, bird, bird, bird');
+        expect(wrapper.find('.project-frame').text()).to.equal('1');
       });
     });
   });

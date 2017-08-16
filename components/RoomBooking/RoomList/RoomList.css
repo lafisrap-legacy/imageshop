@@ -8,15 +8,6 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-.mix img {
-  width: 345px;
-  border-radius: 20px;
-}
-
-.wrapper {
-  border-radius: 20px;
-}
-
-.img {
-  border-radius: 20px;
+.roomlist {
+  width: 100%;
 }

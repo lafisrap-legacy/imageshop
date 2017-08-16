@@ -52,6 +52,7 @@ class PortfolioImage extends React.Component {
     const name = el.captionTitle;
     const image = this.props.images[imageId];
 
+      console.log(this.props.element);
     return (
       <div
         className={cx('mix', ...filters.map(filter => urlize(filter)), s.mix)}
@@ -67,8 +68,16 @@ class PortfolioImage extends React.Component {
           />
           <div className={cx('caption', s.caption)}>
             <div className={cx('caption-text', s.captionText)}>
-              <a className={cx('text-title', s.title)}>{title}</a>
-              <span className={cx('text-category', s.subtitle)}>{subtitle}</span>
+              <div>
+                <a className={cx('text-title', s.title)}>{title}</a>
+                <span className={cx('float-right', s.price)}>€25</span>
+              </div>
+              <div>
+                <button className={cx('btn', 'btn-primary', 'float-left', s.button)}><i className="fa fa-edit fa-4x" /></button>
+                <span className={cx('frame-option', 'float-left', s.frameOption)}>frame-option</span>
+                <span className={cx('text-category', 'float-left', s.subtitle)}>{subtitle}</span>
+                <div className={cx('btn', 'btn-primary','float-right', s.button)}><i className="fa fa-shopping-cart fa-4x" /></div>
+              </div>
             </div>
             <div className={cx('caption-bg', s.background)} />
           </div>

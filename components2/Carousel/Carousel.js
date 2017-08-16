@@ -62,8 +62,8 @@ class Carousel extends React.Component {
   }
 
   render() {
+    const c = this.props.carousel || [];
     let carousel = null;
-    const c = this.props.carousel;
 
     if (!c.length) {
       carousel = <div className="spinner" />;

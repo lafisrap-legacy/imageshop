@@ -8,34 +8,38 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* eslint comma-dangle: [2, "never"] */
+
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import RoomBooking from '../../components/RoomBooking';
-import s from './styles.css';
-import { fetchRooms } from '../actions';
+import cx from 'classnames';
 
-class HomePage extends React.Component {
+import s from './RoomFilter.css';
 
+class RoomFilter extends React.Component {
   static propTypes = {
-    fetchRooms: PropTypes.func.isRequired,
+    //setFilteredList: PropTypes.function,
+    //rooms: PropTypes.object
   };
 
   componentDidMount() {
-    this.props.fetchRooms("today");
+  }
+
+  componentWillUnmount() {
   }
 
   render() {
+    // Collect tabs and buttons
     return (
       <div>
-        <RoomBooking />
+        Filter
       </div>
     );
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchRooms }, dispatch);
+function mapStateToProps({ rooms }) {
+  return { rooms };
 }
 
-export default connect(null, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps)(RoomFilter);

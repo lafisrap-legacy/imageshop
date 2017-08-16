@@ -37,7 +37,7 @@ class Panel extends React.Component {
     const frame = this.props.frames[this.props.frameName];
 
     return (
-      <div className="col-md-5 push-md-7 my-auto">
+      <div className="col-md-5 push-md-7">
         <div className={cx('project-details', s.projectDetails)}>
           <span className="project-name">{image.name}</span>
           <span className="project-description">{image.description}</span>

@@ -45,12 +45,18 @@ class Portfolio extends React.Component {
   }
 
   render() {
+    const portfolio = this.props.portfolio;
+
+    if (!portfolio) return <div className="spinner" />;
+
     return (
       <section className={cx('page-section', s.pageSection)}>
         <div className="container text-center wow fadeIn">
-          <h2>Portfolio</h2>
+          <h2>{portfolio.title}</h2>
           <hr className="colored" />
-          <p>Here are some other projects that we´ve worked on.</p>
+          <p>{portfolio.subtitle}</p>
+          <div className="btn btn-primary">OK</div>
+
           <PortfolioFilter />
           <PortfolioGrid />
         </div>
