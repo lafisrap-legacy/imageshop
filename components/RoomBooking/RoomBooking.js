@@ -10,7 +10,7 @@
 
 /* eslint comma-dangle: [2, "never"] */
 
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 import { isEmpty } from 'lodash';
@@ -20,23 +20,16 @@ import DatePicker from '../DatePicker';
 import RoomFilter from './RoomFilter';
 import RoomList from './RoomList';
 
-class RoomBooking extends React.Component {
+class RoomBooking extends Component {
 
   static propTypes = {
-    portfolio: PropTypes.shape({
-      title: PropTypes.string,
-      subtitle: PropTypes.string,
-      all: PropTypes.string,
-      filters: PropTypes.array,
-      elements: PropTypes.array
-    })
+    date: PropTypes.string
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      date: "today",
       filteredList: null
     };
   }
@@ -47,20 +40,24 @@ class RoomBooking extends React.Component {
   componentWillUnmount() {
   }
 
-  setFilteredList(list) {
-    this.filteredList = list;
+  setFilteredList(filteredList) {
+    this.setState({filteredList});
   }
 
   render() {
+    let {date} = this.props;
+
+    if( !date ) date = "today";
+
     return (
       <section className={cx('room-booking-section', s.section)}>
         <div className="container text-center fadeIn">
           <div className={cx('row', s.row)}>
-            <DatePicker date={this.state.date}/>
-            <RoomFilter setFilteredList={list => this.setFilteredList(list)} />
+            <DatePicker date={date} />
+            <RoomFilter setFilteredList={this.setFilteredList} />
           </div>
           <div className={cx('row', s.row)}>
-            <RoomList date={this.state.date} />
+            <RoomList date={date} />
           </div>
         </div>
       </section>
@@ -68,8 +65,4 @@ class RoomBooking extends React.Component {
   }
 }
 
-function mapStateToProps({ rooms }) {
-  return { rooms };
-}
-
-export default connect(mapStateToProps)(RoomBooking);
+export default RoomBooking;

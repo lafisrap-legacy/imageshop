@@ -11,9 +11,8 @@
 /* eslint comma-dangle: [2, "never"] */
 
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import cx from 'classnames';
 import { isEmpty } from 'lodash';
+import cx from 'classnames';
 
 import s from './RoomInfo.css';
 import { API_BASE_URL } from '../../../src/actions';
@@ -21,7 +20,16 @@ import { API_BASE_URL } from '../../../src/actions';
 class RoomInfo extends React.Component {
 
   static propTypes = {
-    info: PropTypes.object
+    info: PropTypes.shape({
+      avail: PropTypes.arrayOf(PropTypes.string),
+      capacity: PropTypes.number,
+      equipment: PropTypes.arrayOf(PropTypes.string),
+      images: PropTypes.arrayOf(PropTypes.string),
+      location: PropTypes.string,
+      name: PropTypes.string,
+      size: PropTypes.string
+    }),
+    index: PropTypes.number
   };
 
   componentDidMount() {
@@ -33,13 +41,13 @@ class RoomInfo extends React.Component {
   render() {
     const { index, info } = this.props;
 
-    if (isEmpty(info)) return <div className="spinner" />;    
+    if (isEmpty(info)) return <div className="spinner" />;
 
     return (
       <div className="card">
         <div className="card-header" role="tab" id={`RoomInfo__cardHeader${index}`}>
           <h5 className="mb-0">
-            <a 
+            <a
               data-toggle="collapse"
               data-parent="#roombooking__roomlist"
               href={`#RoomInfo__collapse${index}`}
@@ -51,7 +59,9 @@ class RoomInfo extends React.Component {
                 <div className="col-lg-4 col-xs-12">
                   <span className={cx(s.headerItem, s.roomName)}>{info.name}</span>
                   <br />
-                  <span className={cx(s.headerItem, s.roomCapacity)}>Capacity: {info.capacity}</span>
+                  <span className={cx(s.headerItem, s.roomCapacity)}>
+                    Capacity: {info.capacity}
+                  </span>
                   <span className={cx(s.headerItem, s.roomSize)}>{info.size}</span>
                 </div>
                 <div className="col-lg-8 col-xs-12">
@@ -69,10 +79,18 @@ class RoomInfo extends React.Component {
                 <div className={cx(s.headerItem, s.roomName)}>Location</div>
                 <div className={cx(s.headerItem)}>{info.location}</div>
                 <div className={cx(s.headerItem, s.roomName)}>Equipment</div>
-                <div className={cx(s.headerItem)}>{info.equipment.join(", ")}</div>
+                <div className={cx(s.headerItem)}>{info.equipment.join(', ')}</div>
+                <button className={cx('btn', 'btn-success', 'float-left', s.headerItem, s.roomButton)}>Book!</button>
               </div>
               <div className="col-lg-3 col-xs-12">
-                {info.images.map(image => <img src={`${API_BASE_URL}/${image}`} className={cx("img", "img-fluid", s.roomImage)} />)}
+                {info.images.map(image =>
+                  <img
+                    key={image}
+                    src={`${API_BASE_URL}/${image}`}
+                    className={cx('img', 'img-fluid', s.roomImage)}
+                    alt="room"
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -82,8 +100,4 @@ class RoomInfo extends React.Component {
   }
 }
 
-function mapStateToProps({ }) {
-  return { };
-}
-
-export default connect(mapStateToProps)(RoomInfo);
+export default RoomInfo;

@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
 import React from 'react';
 import rewire from 'rewire';
+// sinon
 
 global.YAML = require('yamljs');
 
@@ -914,7 +915,8 @@ describe('Image Shop Test Suite, ', () => {
       });
 
       it('frame info', () => {
-        const wrapper = shallow(<Panel />).setProps({
+        const wrapper = shallow(<Panel />);
+        wrapper.setProps({
           frames: {
             Digital_0b4a: {
               name: 'Digital',
@@ -947,7 +949,6 @@ describe('Image Shop Test Suite, ', () => {
           },
           imageId: 1001,
           frameName: 'Digital_0b4a'
-
         });
 
         expect(wrapper.find('.project-name').text()).to.equal('bird');

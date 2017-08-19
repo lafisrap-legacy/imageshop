@@ -8,43 +8,21 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import ReduxPromise from 'redux-promise';
-import { union, isEmpty } from 'lodash';
 
-import { FETCH_ROOMS } from './actions';
-
-//----------------------------------------------------
-// Centralized application state
-// For more information visit http://redux.js.org/
-const initialState = {
-  //----------------------------------------------------
-  // Rooms, with info of a specific day
-  rooms: {}
-};
-
+import rooms from './reducers/rooms';
 
 //-------------------------------------------------------------------------------------
 // Reducers: Here is the central meeting point for all reducers
 //
+// Redux.combineReducers
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
-const reducers = (state = initialState, action) => {
-  let newState = null;
-
-  switch (action.type) {
-
-    case FETCH_ROOMS: {
-      const data = action.payload.data.sort((a, b) => a.name > b.name);
-
-      return { ...state, rooms: action.payload.data }
-
-      return newState;
-    }
-
-    default:
-      return state;
-  }
-};
-const store = createStoreWithMiddleware(reducers);
+const reducers = combineReducers({ rooms });
+const store = createStoreWithMiddleware(
+  reducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && // eslint-disable-line no-underscore-dangle
+  window.__REDUX_DEVTOOLS_EXTENSION__(), // eslint-disable-line no-underscore-dangle
+);
 
 export default store;

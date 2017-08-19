@@ -14,15 +14,23 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
-import { isEmpty } from 'lodash';
+
+import RoomInfo from '../RoomInfo';
 
 import s from './RoomList.css';
-import RoomInfo from '../RoomInfo';
 
 class RoomList extends React.Component {
 
   static propTypes = {
-
+    rooms: PropTypes.arrayOf(PropTypes.shape({
+      avail: PropTypes.arrayOf(PropTypes.string),
+      capacity: PropTypes.number,
+      equipment: PropTypes.arrayOf(PropTypes.string),
+      images: PropTypes.arrayOf(PropTypes.string),
+      location: PropTypes.string,
+      name: PropTypes.string,
+      size: PropTypes.string
+    })).isRequired
   };
 
   componentDidMount() {
@@ -34,12 +42,11 @@ class RoomList extends React.Component {
   render() {
     const rooms = this.props.rooms;
 
-    if (isEmpty(rooms)) return <div className="spinner" />;    
-
+    if (!rooms.length) return <div className="spinner" />;
     return (
       <div className={cx('room-list', 'clearfix', s.roomlist)}>
         <div id="roombooking__roomlist" role="tablist" aria-multiselectable="true">
-          {this.props.rooms.map((room, i) => <RoomInfo key={`${i}_{room.name}`} index={i} info={room} />)}
+          {this.props.rooms.map((room, i) => <RoomInfo key={`${room.name}_${room.size}`} index={i} info={room} />)}
         </div>
       </div>
     );
@@ -47,7 +54,7 @@ class RoomList extends React.Component {
 }
 
 function mapStateToProps({ rooms }) {
-  return { rooms };
+  return { rooms: rooms.rooms };
 }
 
 export default connect(mapStateToProps)(RoomList);

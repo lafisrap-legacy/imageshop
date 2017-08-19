@@ -142,7 +142,7 @@
     "eslint": "eslint components src test tools postcss.config.js webpack.config.js",
     "stylelint": "stylelint \"components/**/*.css\" \"src/**/*.css\"",
     "lint": "npm run eslint && npm run stylelint",
-    "test": "mocha --compilers js:babel-register --require tools/test_setup.js --require ignore-styles",
+    "test": "mocha --compilers js:babel-register --require tools/test_setup.js --require ignore-styles --recursive",
     "test:watch": "mocha --compilers js:babel-register --reporter min --watch",
     "build": "node tools/build.js",
     "build:debug": "node tools/build.js --debug",

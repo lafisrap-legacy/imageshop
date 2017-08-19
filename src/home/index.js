@@ -11,9 +11,12 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import cx from 'classnames';
+
 import RoomBooking from '../../components/RoomBooking';
-import s from './styles.css';
 import { fetchRooms } from '../actions';
+
+import s from './styles.css';
 
 class HomePage extends React.Component {
 
@@ -22,17 +25,19 @@ class HomePage extends React.Component {
   };
 
   componentDidMount() {
-    this.props.fetchRooms("today");
+    this.props.fetchRooms('today');
   }
 
   render() {
     return (
-      <div>
-        <RoomBooking />
+      <div className={cx(s.wrapper)}>
+        <RoomBooking date="today" i="1" />
       </div>
     );
   }
 }
+
+// Alt: const mapDispatchToProps = { fetchRooms }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchRooms }, dispatch);
